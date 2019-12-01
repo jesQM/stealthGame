@@ -1,6 +1,6 @@
 class ShieldWeapon extends Weapon {
-    constructor(x,y){
-        super(pictures.shieldU, x,y);
+    constructor(entity){
+        super(pictures.shieldU, entity);
     }
 
     actualizar() {

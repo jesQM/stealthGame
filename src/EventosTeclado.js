@@ -27,6 +27,12 @@ function onKeyDown( event) {
             case 37:
                 controles.moverX = -1;
                 break;
+            case 49:
+                controles.weapon = 1;
+                break;
+            case 50:
+                controles.weapon = 2;
+                break;
         }
 
     }

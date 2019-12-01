@@ -1,0 +1,3 @@
+class WeaponHolder extends Modelo {
+
+}

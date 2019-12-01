@@ -13,36 +13,16 @@ class GameLayer extends Layer {
         this.player = null;
         this.bushes = [];
         this.enemies = [];
+        this.hud = new HUD(2);
 
         this.backGround = new Fondo(pictures.background, 480/2, 320/2);
 
         new LevelLoader(this).cargarMapa("res/map/mapa.txt");
         new PropertyLoader(this).cargarMapa("res/map/properties001.txt");
 
-        this.player.setWeapon( new ShieldWeapon(this.player) );
-
         this.stealthStartAnimation = null;
         this.updateStealthAnimation = false;
         this.stealthForeground = new Fondo(pictures.stealthLastStep, 480/2, 320/2);
-
-        // extra below
-        //this.player = new Player(100,100);
-
-        /*
-        this.enemy = new SwordEnemy(0,0);
-        this.enemy.waypoints.push([-200,-100]);
-        this.enemy.waypoints.push([-200,-200]);
-        this.enemy.waypoints.push([-100,-200]);
-        this.enemy.waypoints.push([-100,-100]);
-        this.enemy.setToPatrol( this.enemy.waypoints );
-        this.espacio.agregarCuerpoDinamico(this.enemy);
-        */
-
-        /*this.espacio.agregarCuerpoDinamico(this.player);
-        //this.espacio.agregarCuerpoDinamico(this.enemy);
-        this.espacio.agregarCuerpoEstatico(new Modelo(pictures.enemyW4, 300, 200));
-        this.espacio.agregarCuerpoEstatico(new Modelo(pictures.enemyW4, 320, 200));
-        this.espacio.agregarCuerpoDinamico(new SwordEnemy(310, 160));*/
     }
 
 
@@ -89,6 +69,8 @@ class GameLayer extends Layer {
             this.updateStealthAnimation = false;
             this.drawStealthForeground = false;
         }
+
+        this.hud.actualizar();
     }
 
     calcularScroll() {
@@ -113,6 +95,8 @@ class GameLayer extends Layer {
         } else if (this.stealthStartAnimation != null) {
             this.stealthStartAnimation.dibujar(480 / 2, 320 / 2);
         }
+
+        this.hud.dibujar();
     }
 
     procesarControles(){
@@ -143,6 +127,11 @@ class GameLayer extends Layer {
             this.player.moverY(0);
         }
 
+        // Weapon change
+        if ( controles.weapon != 0) {
+            if ( this.player.weapons[ controles.weapon-1 ] != null && this.player.weapons[ controles.weapon-1 ] != undefined )
+                this.player.weapon = this.player.weapons[ controles.weapon-1 ];
+        }
     }
 
     checkIfCrit(damaged) {
@@ -152,5 +141,9 @@ class GameLayer extends Layer {
                 console.log("Crit!");
             }
         }
+    }
+
+    addItemToHUD(itemsrc, slot) {
+        this.hud.setItemInSlot(itemsrc, slot);
     }
 }

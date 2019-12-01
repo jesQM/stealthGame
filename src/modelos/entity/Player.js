@@ -7,6 +7,7 @@ class Player extends Character {
         this.inBush = false;
         this.seenBy = [];
         this.hasKey = false;
+        this.weapons = [];
 
         this.woundedPictures = [
             pictures.playerW0,
@@ -76,5 +77,9 @@ class Player extends Character {
 
     isMovingY() {
         return this.vy != 0;
+    }
+
+    changeWeapon( index ) {
+        this.weapon = this.weapons[index];
     }
 }

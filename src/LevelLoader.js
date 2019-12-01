@@ -48,6 +48,18 @@ class LevelLoader {
                 door.y = door.y - door.alto / 2;
                 this.gameLayer.espacio.agregarCuerpoDinamico(door);
                 break;
+            case "W":
+                var sword = new Sword(x, y);
+                sword.x = sword.x- sword.ancho / 2;
+                sword.y = sword.y - sword.alto / 2;
+                this.gameLayer.espacio.agregarCuerpoDinamico(sword);
+                break;
+            case "H":
+                var shield = new Shield(x, y);
+                shield.x = shield.x- shield.ancho / 2;
+                shield.y = shield.y - shield.alto / 2;
+                this.gameLayer.espacio.agregarCuerpoDinamico(shield);
+                break;
             case "B":
                 var bush = new Bush(x, y);
                 bush.x = bush.x - bush.ancho / 2;

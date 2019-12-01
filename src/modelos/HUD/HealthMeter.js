@@ -1,0 +1,3 @@
+class HealthMeter extends Modelo {
+
+}
