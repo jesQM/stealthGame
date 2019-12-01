@@ -161,6 +161,14 @@ class Enemy extends Character {
         //this.movementStrategy = null;
         this.visionArea = null;
 
+        for (var i = 0; i<gameLayer.player.seenBy.length; i++)
+        { // we remove ourselves from the "we see player" list
+            if (gameLayer.player.seenBy[i] == this) {
+                gameLayer.player.seenBy.splice(i,1);
+                i--;
+            }
+        }
+
         this.removeFromGame();
     }
 

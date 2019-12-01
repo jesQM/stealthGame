@@ -13,7 +13,9 @@ class PropertyLoader {
 
             for (var i = 0; i < lineas.length; i++){
                 var linea = lineas[i];
+
                 var data = linea.split(';');
+                if (data.length == 1 || data[0] == '#') continue;
 
                 let simbolo = data[0];
                 let pos = data[1].split(',');
