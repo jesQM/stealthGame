@@ -54,73 +54,7 @@ class SwordEnemy extends Enemy {
             }
         }
 
-
-        if (this.movementStrategy.status == movementStrategyStatus.finished) {
-            switch ( this.followState ) {
-                case enemyFollowStates.patrol:
-                    this.movementStrategy.resetPatrol(); // so when we have a patrol, we can start it again
-                    break;
-
-                case enemyFollowStates.lookAround:
-                    this.movementStrategy = new TraceBackStepsMovement(this);
-                    this.followState = enemyFollowStates.traceStepsBack;
-                    break;
-
-                case enemyFollowStates.traceStepsBack:
-                    this.movementStrategy = this.interruptedMovementStrategy.pop();
-                    this.followState = this.interruptedMovementStates.pop();
-                    break;
-
-                case enemyFollowStates.followPlayer:
-                    this.movementStrategy = new LookAroundMovement(this);
-                    this.followState = enemyFollowStates.lookAround;
-                    break;
-            }
-        }
-    }
-
-    isWallBlocking() {
-        //console.log("is blocking?");
-        let playerX = gameLayer.player.x;
-        let playerY = gameLayer.player.y;
-
-        let bot = this.y+this.alto/2;
-        let top = this.y-this.alto/2;
-        let right = this.x+this.ancho/2;
-        let left = this.x-this.ancho/2;
-
-        let botP = playerY+gameLayer.player.alto/2;
-        let topP = playerY-gameLayer.player.alto/2;
-        let rightP = playerX+gameLayer.player.ancho/2;
-        let leftP = playerX-gameLayer.player.ancho/2;
-
-        let bloques = gameLayer.espacio.estaticos;
-        for (var i = 0; i < bloques.length; i++){ // for all walls
-            if ( this.visionArea.colisiona(bloques[i]) ){ // if they are inside my vision
-
-                let Ebot = bloques[i].y+bloques[i].alto/2;
-                let Etop = bloques[i].y-bloques[i].alto/2;
-                let Eright = bloques[i].x+bloques[i].ancho/2;
-                let Eleft = bloques[i].x-bloques[i].ancho/2;
-                /* Caso del comentario:
-                       P _
-                        |_|
-                            E
-                 */
-                if (
-                    (( Etop < top && Eleft < left   &&   botP < Ebot && Eright > rightP ) || // Caso del comentario
-                    ( Etop < top && Eright > right &&   botP < Ebot && Eleft < leftP ) || // P en top derecha
-                    ( Ebot > bot && Eright > right &&   topP > Etop && Eleft < leftP ) || // P en bot derecha
-                    ( Ebot > bot && Eleft < left   &&   topP > Etop && Eright > rightP ))
-                ) {
-                    // something blocks
-                    //console.log("tapado");
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        super.manageMovement();
     }
 
     setToPatrol( arrayOfWaypoints ){

@@ -59,7 +59,7 @@ class MovementStrategy {
         } else { // moving Y
             if (this.entity.vy > 0)
                 this.entity.orientation = orientations.up;
-            else
+            else if ( this.entity.vy < 0 )
                 this.entity.orientation = orientations.down;
         }
 

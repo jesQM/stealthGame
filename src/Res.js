@@ -25,7 +25,7 @@ var pictures = {
     llave : "res/mapElements/llave.png",
     door : "res/mapElements/door.png",
     bow : "res/bow.png",
-    arrow : "res/bow.png",
+    arrow : "res/arrow.png",
 
     swordR: "res/swordAnim/swordR.png",
     swordL: "res/swordAnim/swordL.png",
@@ -33,6 +33,11 @@ var pictures = {
     swordPreparationL: "res/swordAnim/preaparationAnimL.png",
     swordAttackR: "res/swordAnim/attackAnimR.png",
     swordAttackL: "res/swordAnim/attackAnimL.png",
+
+    shieldU: "res/shield/shieldU.png",
+    shieldD: "res/shield/shieldD.png",
+    shieldL: "res/shield/shieldL.png",
+    shieldR: "res/shield/shieldR.png",
 
     stealthOn: "res/StealthStartAnim/animOn.png",
     stealthLastStep: "res/StealthStartAnim/10.png",

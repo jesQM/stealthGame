@@ -22,6 +22,7 @@ class Player extends Character {
         console.log("player: " + this.x + " - " + this.y);
 
         super.actualizar();
+        this.changeOrientation();
         if ( this.seenBy.length == 0 && this.stealthState == stealthStates.seen )
             this.stealthState = stealthStates.visible;
     }
@@ -36,5 +37,44 @@ class Player extends Character {
 
     setStealthState(newState){
         this.stealthState = newState;
+    }
+
+    changeOrientation() {
+        if ( this.isMovingX() && this.isMovingY()){
+            if (this.vx > 0){
+                if (this.vy > 0)
+                    this.orientation = orientations.upright;
+                else
+                    this.orientation = orientations.downright;
+            }
+
+            if (this.vx < 0) {
+                if (this.vy > 0)
+                    this.orientation = orientations.upleft;
+                else
+                    this.orientation = orientations.downleft;
+            }
+        } else if ( this.isMovingX() ) {
+            if (this.vx > 0)
+                this.orientation = orientations.right;
+            else
+                this.orientation = orientations.left;
+
+        } else { // moving Y
+            if (this.vy > 0)
+                this.orientation = orientations.up;
+            else if ( this.vy < 0 )
+                this.orientation = orientations.down;
+        }
+
+
+    }
+
+    isMovingX() {
+        return this.vx != 0;
+    }
+
+    isMovingY() {
+        return this.vy != 0;
     }
 }
