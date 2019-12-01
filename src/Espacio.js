@@ -53,6 +53,7 @@ class Espacio {
             this.moverIzquierda(i);
             if (typeof this.dinamicos[i] === "undefined") return;
             this.moverAbajo(i);
+            if (typeof this.dinamicos[i] === "undefined") return;
             this.moverArriba(i);
         }
 
@@ -92,6 +93,8 @@ class Espacio {
                         // La distancia es MENOR que nuestro movimiento posible
                         // Tenemos que actualizar el movimiento posible a uno menor
                         movimientoPosible = izquierdaEstatico - derechaDinamico ;
+
+                        this.dinamicos[i].stoppedByStaticObject( this.estaticos[j] );
                     }
                 }
             }
@@ -135,6 +138,7 @@ class Espacio {
                         // La distancia es MAYOR que nuestro movimiento posible
                         // Tenemos que actualizar el movimiento posible a uno mayor
                         movimientoPosible = derechaEstatico - izquierdaDinamico ;
+                        this.dinamicos[i].stoppedByStaticObject( this.estaticos[j] );
                     }
                 }
             }
@@ -185,8 +189,7 @@ class Espacio {
                         // Tenemos que actualizar el movimiento posible a uno menor
                         movimientoPosible = arribaEstatico - abajoDinamico;
                         this.dinamicos[i].choqueAbajo = true;
-                        if (this.dinamicos[i] == gameLayer.jugador)
-                            this.estaticos[j].pisadoPorJugador()();
+                        this.dinamicos[i].stoppedByStaticObject( this.estaticos[j] );
 
                         if (derechaDinamico <= derechaEstatico) {
                             this.dinamicos[i].fueraPorDerecha = false;
@@ -244,6 +247,7 @@ class Espacio {
                         // Tenemos que actualizar el movimiento posible a uno mayor
 
                         movimientoPosible = abajoEstatico - arribaDinamico ;
+                        this.dinamicos[i].stoppedByStaticObject( this.estaticos[j] );
                     }
 
                 }

@@ -31,18 +31,22 @@ class Arrow extends Modelo{
     constructor( x, y, vx ,vy ) {
         super(pictures.arrow, x, y);
 
+        this.inVx = vx;
+        this.inVy = vy;
         this.vx = vx;
         this.vy = vy;
 
         this.damage = -25;
         this.targets = [];
         this.targets.push( gameLayer.player );
+
+        this.toBeDestroyed = false;
     }
 
     actualizar() {
         super.actualizar();
 
-        if ( this.vx == 0 && this.vy == 0 ) {
+        if (this.toBeDestroyed){
             gameLayer.espacio.eliminarCuerpoDinamico(this);
             return;
         }
@@ -55,5 +59,9 @@ class Arrow extends Modelo{
                 break;
             }
         }
+    }
+
+    stoppedByStaticObject(staticObject) {
+        this.toBeDestroyed = true;
     }
 }

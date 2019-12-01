@@ -9,7 +9,6 @@ class PatrolMovement extends MovementStrategy {
     }
 
     actualizar() {
-        console.log(this.targetX + " - " + this.targetY);
         if ( this.status != movementStrategyStatus.finished ) {
 
             if ( this.areWeNearTarget() ) {

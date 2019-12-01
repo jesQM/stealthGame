@@ -58,4 +58,8 @@ class Modelo {
     getIzquierdaDinamico(){
         return this.x - this.ancho/2;
     }
+
+    stoppedByStaticObject(staticObject) {
+
+    }
 }
