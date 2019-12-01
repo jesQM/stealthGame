@@ -13,7 +13,9 @@ class PropertyLoader {
 
             for (var i = 0; i < lineas.length; i++){
                 var linea = lineas[i];
+
                 var data = linea.split(';');
+                if (data.length == 1 || data[0] == '#') continue;
 
                 let simbolo = data[0];
                 let pos = data[1].split(',');
@@ -54,6 +56,14 @@ class PropertyLoader {
                 enemy.movementStrategy.orientationOfEntity = parseInt( direction );
                 if ( waypoints.length > 1 )
                     enemy.setToPatrol(waypoints);
+                this.gameLayer.enemies.push(enemy);
+                this.gameLayer.espacio.agregarCuerpoDinamico(enemy);
+                break;
+            case "B":
+                var enemy = new BowEnemy(x, y);
+                enemy.x = enemy.x- enemy.ancho / 2;
+                enemy.y = enemy.y - enemy.alto / 2;
+                enemy.movementStrategy.orientationOfEntity = parseInt( direction );
                 this.gameLayer.enemies.push(enemy);
                 this.gameLayer.espacio.agregarCuerpoDinamico(enemy);
                 break;

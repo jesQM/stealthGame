@@ -6,6 +6,7 @@ class Player extends Character {
         this.stealthState = stealthStates.visible;
         this.inBush = false;
         this.seenBy = [];
+        this.hasKey = false;
 
         this.woundedPictures = [
             pictures.playerW0,
@@ -17,6 +18,9 @@ class Player extends Character {
     }
 
     actualizar() {
+
+        console.log("player: " + this.x + " - " + this.y);
+
         super.actualizar();
         if ( this.seenBy.length == 0 && this.stealthState == stealthStates.seen )
             this.stealthState = stealthStates.visible;

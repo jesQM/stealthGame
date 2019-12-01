@@ -36,12 +36,17 @@ class LevelLoader {
                 this.gameLayer.player.y = this.gameLayer.player.y - this.gameLayer.player.alto / 2; // esto lo centra
                 this.gameLayer.espacio.agregarCuerpoDinamico(this.gameLayer.player);
                 break;
-            case "E":
-                var enemy = new SwordEnemy(x, y);
-                enemy.x = enemy.x- enemy.ancho / 2;
-                enemy.y = enemy.y - enemy.alto / 2;
-                this.gameLayer.enemies.push(enemy);
-                this.gameLayer.espacio.agregarCuerpoDinamico(enemy);
+            case "K":
+                var llave = new Key(x, y);
+                llave.x = llave.x- llave.ancho / 2;
+                llave.y = llave.y - llave.alto / 2;
+                this.gameLayer.espacio.agregarCuerpoDinamico(llave);
+                break;
+            case "D":
+                var door = new Door(x, y);
+                door.x = door.x- door.ancho / 2;
+                door.y = door.y - door.alto / 2;
+                this.gameLayer.espacio.agregarCuerpoDinamico(door);
                 break;
             case "B":
                 var bush = new Bush(x, y);

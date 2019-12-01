@@ -22,6 +22,10 @@ var pictures = {
     wall64x64 : "res/wall/64x64.png",
 
     bush : "res/bush.png",
+    llave : "res/mapElements/llave.png",
+    door : "res/mapElements/door.png",
+    bow : "res/bow.png",
+    arrow : "res/bow.png",
 
     swordR: "res/swordAnim/swordR.png",
     swordL: "res/swordAnim/swordL.png",
