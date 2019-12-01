@@ -24,6 +24,8 @@ var pictures = {
     bush : "res/bush.png",
     llave : "res/mapElements/llave.png",
     door : "res/mapElements/door.png",
+    bow : "res/bow.png",
+    arrow : "res/bow.png",
 
     swordR: "res/swordAnim/swordR.png",
     swordL: "res/swordAnim/swordL.png",

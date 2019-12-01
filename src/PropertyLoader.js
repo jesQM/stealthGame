@@ -59,6 +59,14 @@ class PropertyLoader {
                 this.gameLayer.enemies.push(enemy);
                 this.gameLayer.espacio.agregarCuerpoDinamico(enemy);
                 break;
+            case "B":
+                var enemy = new BowEnemy(x, y);
+                enemy.x = enemy.x- enemy.ancho / 2;
+                enemy.y = enemy.y - enemy.alto / 2;
+                enemy.movementStrategy.orientationOfEntity = parseInt( direction );
+                this.gameLayer.enemies.push(enemy);
+                this.gameLayer.espacio.agregarCuerpoDinamico(enemy);
+                break;
         }
     }
 }
