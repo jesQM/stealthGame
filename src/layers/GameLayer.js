@@ -19,7 +19,7 @@ class GameLayer extends Layer {
         new LevelLoader(this).cargarMapa("res/map/mapa.txt");
         new PropertyLoader(this).cargarMapa("res/map/properties001.txt");
 
-        this.player.setWeapon( new SwordWeapon(this.player) );
+        this.player.setWeapon( new ShieldWeapon(this.player) );
 
         this.stealthStartAnimation = null;
         this.updateStealthAnimation = false;
