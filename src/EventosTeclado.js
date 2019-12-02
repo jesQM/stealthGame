@@ -33,6 +33,14 @@ function onKeyDown( event) {
             case 50:
                 controles.weapon = 2;
                 break;
+            case 77:
+                controles.mute = true;
+                break;
+            case 78:
+                controles.muteMusic = true;
+                break;
+            default:
+                console.log(event.keyCode);
         }
 
     }
