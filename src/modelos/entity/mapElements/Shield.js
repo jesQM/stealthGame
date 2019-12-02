@@ -13,6 +13,7 @@ class Shield extends Modelo {
         gameLayer.espacio.eliminarCuerpoDinamico(this);
         gameLayer.player.weapons[1] = new ShieldWeapon(gameLayer.player);
 
-        gameLayer.addItemToHUD( pictures.shieldR, 1 );
+        gameLayer.addItemToHUD( pictures.shieldR, 2 );
+        gameLayer.addPictureToSlotInHUD( pictures.pic2, 2 );
     }
 }

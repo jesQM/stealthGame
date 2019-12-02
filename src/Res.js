@@ -42,6 +42,9 @@ var pictures = {
     stealthOn: "res/StealthStartAnim/animOn.png",
     stealthLastStep: "res/StealthStartAnim/10.png",
     stealthOff: "res/StealthStartAnim/animOff.png",
+
+    pic1: "res/1.png",
+    pic2: "res/2.png",
 }
 
 var rutasImagenes = Object.values(pictures);

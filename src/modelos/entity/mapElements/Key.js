@@ -12,5 +12,7 @@ class Key extends Modelo {
     playerTakenKey() {
         gameLayer.espacio.eliminarCuerpoDinamico(this);
         gameLayer.player.hasKey = true;
+
+        gameLayer.addItemToHUD( pictures.llave, 0 );
     }
 }

@@ -13,7 +13,7 @@ class GameLayer extends Layer {
         this.player = null;
         this.bushes = [];
         this.enemies = [];
-        this.hud = new HUD(2);
+        this.hud = new HUD(3);
 
         this.backGround = new Fondo(pictures.background, 480/2, 320/2);
 
@@ -145,5 +145,8 @@ class GameLayer extends Layer {
 
     addItemToHUD(itemsrc, slot) {
         this.hud.setItemInSlot(itemsrc, slot);
+    }
+    addPictureToSlotInHUD(itemsrc, slot) {
+        this.hud.setPictureInSlot(itemsrc, slot);
     }
 }
