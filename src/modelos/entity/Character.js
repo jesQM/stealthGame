@@ -38,6 +38,8 @@ class Character extends Movable {
     damage( amount ){
         this.health += amount;
         this.changePictureToShowHealth();
+
+        gameLayer.createBloodEffect( this.x, this.y);
     }
 
     changePictureToShowHealth() {

@@ -19,8 +19,10 @@ class GameLayer extends Layer {
         this.scrollX = 0;
         this.scrollY = 0;
         this.player = null;
+
         this.bushes = [];
         this.enemies = [];
+        this.visualEffects = [];
 
         this.hud = new HUD(3, 40, 270);
         this.healthMeter = new HUD(4, 40, 50);
@@ -42,6 +44,8 @@ class GameLayer extends Layer {
         this.espacio.actualizar();
         for (var i = 0; i < this.espacio.dinamicos.length; i++)
             this.espacio.dinamicos[i].actualizar();
+        for (var i = 0; i < this.visualEffects.length; i++)
+            this.visualEffects[i].actualizar();
 
         let inBush = false;
         for( var i = 0; i < this.bushes.length; i++ ){
@@ -95,6 +99,8 @@ class GameLayer extends Layer {
 
         for (var i = 0; i < this.espacio.estaticos.length; i++)
             this.espacio.estaticos[i].dibujar(this.scrollX, this.scrollY);
+        for (var i = 0; i < this.visualEffects.length; i++)
+            this.visualEffects[i].dibujar(this.scrollX, this.scrollY);
         for (var i = 0; i < this.bushes.length; i++)
             this.bushes[i].dibujar(this.scrollX, this.scrollY);
         for (var i = 0; i < this.espacio.dinamicos.length; i++)
@@ -161,7 +167,6 @@ class GameLayer extends Layer {
     }
 
     updateHealth() {
-        console.log("updated")
         let numHearts = this.player.health / (this.player.maxHealth/this.healthMeter.numberOfSlots);
         for (let i = 0; i < numHearts; i++) {
             this.healthMeter.setItemInSlot(pictures.heart, i);
@@ -169,5 +174,32 @@ class GameLayer extends Layer {
         for (let i = numHearts; i < this.healthMeter.numberOfSlots; i++) {
             this.healthMeter.slots[i].itemHolding = null;
         }
+    }
+
+    removeEffect(visualEffect) {
+        for (var i = 0; i < this.visualEffects.length; i++){
+            if (this.visualEffects[i] == visualEffect){
+                this.visualEffects.splice(i,1);
+                break;
+            }
+        }
+    }
+
+    createBloodEffect(x,y) {
+        let possiblePics = [];
+            possiblePics.push( pictures.blood1 );
+            possiblePics.push( pictures.blood2 );
+            possiblePics.push( pictures.blood3 );
+            possiblePics.push( pictures.blood4 );
+            possiblePics.push( pictures.blood5 );
+            possiblePics.push( pictures.blood6 );
+            possiblePics.push( pictures.blood7 );
+
+        let index = Math.floor((Math.random() * possiblePics.length))
+        let pic = possiblePics[ index ]
+
+        let offsetX = Math.floor((Math.random() * 21) - 10);
+        let offsetY = Math.floor((Math.random() * 21) - 10);
+        this.visualEffects.push( new VisualEffect( pic, x + offsetX, y + offsetY, 120 ) );
     }
 }

@@ -46,6 +46,14 @@ var pictures = {
 
     pic1: "res/1.png",
     pic2: "res/2.png",
+
+    blood1: "res/blood/bloodsplats_0001_20x20.png",
+    blood2: "res/blood/bloodsplats_0002_20x20.png",
+    blood3: "res/blood/bloodsplats_0003_20x20.png",
+    blood4: "res/blood/bloodsplats_0004_20x20.png",
+    blood5: "res/blood/bloodsplats_0005_20x20.png",
+    blood6: "res/blood/bloodsplats_0006_20x20.png",
+    blood7: "res/blood/bloodsplats_0007_20x20.png",
 }
 
 var rutasImagenes = Object.values(pictures);

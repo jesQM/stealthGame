@@ -110,8 +110,8 @@ class Enemy extends Character {
         if ( this.woundCooldown > 0 ) return;
         this.woundCooldown = this.woundMaxCooldown;
 
-        this.health += amount;
-        this.changePictureToShowHealth();
+        super.damage(amount);
+
         this.adjustMaxSpeed();
 
         this.speed = 0;
@@ -158,7 +158,6 @@ class Enemy extends Character {
     kill(){
         super.kill();
 
-        //this.movementStrategy = null;
         this.visionArea = null;
 
         for (var i = 0; i<gameLayer.player.seenBy.length; i++)
@@ -175,7 +174,7 @@ class Enemy extends Character {
     removeFromGame(){
         for (var i = 0; i < gameLayer.enemies.length; i++) {
             if ( gameLayer.enemies[i] == this ) {
-                gameLayer.enemies.splice(i, 1);
+                //gameLayer.enemies.splice(i, 1);
                 break;
             }
         }
