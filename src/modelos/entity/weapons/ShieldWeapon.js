@@ -65,6 +65,6 @@ class ShieldWeapon extends Weapon {
     }
 
     wasEquipped(){
-        new AudioManager().playShieldWeaponSelect();
+        gameLayer.music.playShieldWeaponSelect();
     }
 }

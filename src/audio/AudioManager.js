@@ -3,7 +3,9 @@ class AudioManager {
     constructor(){
         this.background = null;
         this.background_LPF = null;
+        this.muteMusic = false;
         this.mute = false;
+
     }
 
     playSwordWeaponSelect(){
@@ -47,8 +49,7 @@ class AudioManager {
     }
 
     playBackground(){
-        if ( this.mute ) return;
-        this.changeTrack( this.background_LPF, this.background );
+        if ( this.mute || this.muteMusic ) return;
         let currentTime = 0;
         if ( this.background_LPF != null ) currentTime = this.background_LPF.audio.currentTime;
 
@@ -59,8 +60,7 @@ class AudioManager {
     }
 
     playBackgroundBush(){
-        if ( this.mute ) return;
-        this.changeTrack( this.background, this.background_LPF );
+        if ( this.mute || this.muteMusic ) return;
         let currentTime = 0;
         if ( this.background != null ) currentTime = this.background.audio.currentTime;
 
@@ -70,8 +70,14 @@ class AudioManager {
         if ( this.background != null ) this.background.pause();
     }
 
-    changeTrack(current, substitute) {
+    changeTrack(current, substitute, track) {
+        let currentTime = 0;
+        if ( current != null ) currentTime = current.audio.currentTime;
 
+        substitute = new AudioPlayer( track, true );
+        substitute.audio.currentTime = currentTime;
+        substitute.play();
+        if ( current != null ) current.pause();
     }
 
     playPersecution(){
@@ -86,12 +92,18 @@ class AudioManager {
 
     disableSound(){
         this.mute = true;
+        this.disableMusic();
+    }
+
+    disableMusic(){
+        this.muteMusic = true;
         if ( this.background != null ) this.background.pause();
         if ( this.background_LPF != null ) this.background_LPF.pause();
     }
 
     enableSound(){
         this.mute = false;
+        this.muteMusic = false;
         this.playBackground();
-    }¡
+    }
 }

@@ -154,6 +154,21 @@ class GameLayer extends Layer {
         if ( controles.weapon != 0) {
             this.player.changeWeapon( controles.weapon-1 )
         }
+
+        if ( controles.mute ) {
+            if ( this.music.mute )
+                this.music.enableSound();
+            else
+                this.music.disableSound();
+            controles.mute = false;
+        }
+        if ( controles.muteMusic ) {
+            if ( this.music.muteMusic )
+                this.music.enableSound();
+            else
+                this.music.disableMusic();
+            controles.muteMusic = false;
+        }
     }
 
     checkIfCrit(damaged) {

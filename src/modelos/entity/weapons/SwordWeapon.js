@@ -21,7 +21,7 @@ class SwordWeapon extends Weapon {
         let callbackPreparation = function () {
             this.animationStep++;
             this.damaging = true;
-            new AudioManager().playSwordSlash();
+            gameLayer.music.playSwordSlash();
 
             if ( this.entity.vx < 0 ) {
                 this.orientationAnimations = this.animL;
@@ -90,6 +90,6 @@ class SwordWeapon extends Weapon {
     }
 
     wasEquipped(){
-        new AudioManager().playSwordWeaponSelect();
+        gameLayer.music.playSwordWeaponSelect();
     }
 }
