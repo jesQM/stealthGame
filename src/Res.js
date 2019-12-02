@@ -26,6 +26,7 @@ var pictures = {
     door : "res/mapElements/door.png",
     bow : "res/bow.png",
     arrow : "res/arrow.png",
+    heart : "res/heart.png",
 
     swordR: "res/swordAnim/swordR.png",
     swordL: "res/swordAnim/swordL.png",

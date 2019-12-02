@@ -21,7 +21,9 @@ class GameLayer extends Layer {
         this.player = null;
         this.bushes = [];
         this.enemies = [];
-        this.hud = new HUD(3);
+
+        this.hud = new HUD(3, 40, 270);
+        this.healthMeter = new HUD(4, 40, 50);
 
         this.backGround = new Fondo(pictures.background, 480/2, 320/2);
 
@@ -31,6 +33,8 @@ class GameLayer extends Layer {
         this.stealthStartAnimation = null;
         this.updateStealthAnimation = false;
         this.stealthForeground = new Fondo(pictures.stealthLastStep, 480/2, 320/2);
+
+        this.updateHealth();
     }
 
 
@@ -77,8 +81,6 @@ class GameLayer extends Layer {
             this.updateStealthAnimation = false;
             this.drawStealthForeground = false;
         }
-
-        this.hud.actualizar();
     }
 
     calcularScroll() {
@@ -105,6 +107,7 @@ class GameLayer extends Layer {
         }
 
         this.hud.dibujar();
+        this.healthMeter.dibujar();
     }
 
     procesarControles(){
@@ -137,8 +140,7 @@ class GameLayer extends Layer {
 
         // Weapon change
         if ( controles.weapon != 0) {
-            if ( this.player.weapons[ controles.weapon-1 ] != null && this.player.weapons[ controles.weapon-1 ] != undefined )
-                this.player.weapon = this.player.weapons[ controles.weapon-1 ];
+            this.player.changeWeapon( controles.weapon-1 )
         }
     }
 
@@ -156,5 +158,16 @@ class GameLayer extends Layer {
     }
     addPictureToSlotInHUD(itemsrc, slot) {
         this.hud.setPictureInSlot(itemsrc, slot);
+    }
+
+    updateHealth() {
+        console.log("updated")
+        let numHearts = this.player.health / (this.player.maxHealth/this.healthMeter.numberOfSlots);
+        for (let i = 0; i < numHearts; i++) {
+            this.healthMeter.setItemInSlot(pictures.heart, i);
+        }
+        for (let i = numHearts; i < this.healthMeter.numberOfSlots; i++) {
+            this.healthMeter.slots[i].itemHolding = null;
+        }
     }
 }

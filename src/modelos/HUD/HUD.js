@@ -1,9 +1,9 @@
 class HUD {
-    constructor(numberOfSlots) {
+    constructor(numberOfSlots, x0, y0) {
         this.numberOfSlots = numberOfSlots;
         this.slots = [];
         for (let i = 0; i < numberOfSlots; i++) {
-            this.slots[i] = new HUDSlot(40 + i * 50, 270);
+            this.slots[i] = new HUDSlot(pictures.squareVisionArea40x40, x0 + i * 50, y0);
         }
     }
 
@@ -29,8 +29,8 @@ class HUD {
 }
 
 class HUDSlot extends  Modelo{
-    constructor(x, y) {
-        super(pictures.squareVisionArea40x40, x,y);
+    constructor(pic, x, y) {
+        super(pic, x,y);
 
         this.picture = null;
         this.itemHolding = null;

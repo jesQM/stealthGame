@@ -71,6 +71,11 @@ class Player extends Character {
 
     }
 
+    damage(amount) {
+        super.damage(amount);
+        gameLayer.updateHealth();
+    }
+
     isMovingX() {
         return this.vx != 0;
     }
@@ -80,6 +85,7 @@ class Player extends Character {
     }
 
     changeWeapon( index ) {
-        this.weapon = this.weapons[index];
+        if ( this.weapons[ index ] != null && this.weapons[ index ] != undefined )
+            this.weapon = this.weapons[index];
     }
 }

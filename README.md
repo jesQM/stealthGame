@@ -11,3 +11,4 @@ The game can be found here: https://jesqm.github.io/stealthGame/
 * Key model: https://opengameart.org/users/armisius
 * Door model: Castle door by Tuomo Untinen
 * Bow model: Heather Lee Harvey, EmeraldActivities.com & http://opengameart.org/users/emerald
+* Heart model: NicoleMarieProductions (https://opengameart.org/users/nicole-marie-t)
