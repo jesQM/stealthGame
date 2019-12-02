@@ -10,6 +10,6 @@ class Door extends Modelo {
     }
 
     playerOpenDoor() {
-
+        gameLayer.finishLevel();
     }
 }
