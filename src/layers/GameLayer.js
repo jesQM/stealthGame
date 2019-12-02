@@ -2,10 +2,18 @@ class GameLayer extends Layer {
 
     constructor() {
         super();
-        this.start();
+        this.maxLevel = 1;
+        this.start(0);
     }
 
-    start (){
+    finishLevel() {
+        if ( this.levelNumber < this.maxLevel )
+            this.start(this.levelNumber + 1);
+    }
+
+    start (levelNumber){
+        this.levelNumber = levelNumber;
+
         this.espacio = new Espacio(0);
 
         this.scrollX = 0;
@@ -17,8 +25,8 @@ class GameLayer extends Layer {
 
         this.backGround = new Fondo(pictures.background, 480/2, 320/2);
 
-        new LevelLoader(this).cargarMapa("res/map/mapa.txt");
-        new PropertyLoader(this).cargarMapa("res/map/properties001.txt");
+        new LevelLoader(this).cargarMapa("res/map/map"+levelNumber+".txt");
+        new PropertyLoader(this).cargarMapa("res/map/properties"+levelNumber+".txt");
 
         this.stealthStartAnimation = null;
         this.updateStealthAnimation = false;
