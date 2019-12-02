@@ -63,4 +63,8 @@ class ShieldWeapon extends Weapon {
             dinamico.targets.push( gameLayer.enemies[i] );
         }
     }
+
+    wasEquipped(){
+        new AudioManager().playShieldWeaponSelect();
+    }
 }

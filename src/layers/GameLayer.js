@@ -3,6 +3,9 @@ class GameLayer extends Layer {
     constructor() {
         super();
         this.maxLevel = 1;
+        this.music = new AudioManager();
+        this.music.playBackground();
+
         this.start(0);
     }
 
@@ -41,6 +44,7 @@ class GameLayer extends Layer {
 
 
     actualizar (){
+
         this.espacio.actualizar();
         for (var i = 0; i < this.espacio.dinamicos.length; i++)
             this.espacio.dinamicos[i].actualizar();
@@ -60,12 +64,14 @@ class GameLayer extends Layer {
                 if (!this.player.inBush){
                     this.player.inBush = true;
                     this.player.setStealthState(stealthStates.hidden);
+                    this.music.playBackgroundBush();
                 }
             }
         } else {
             if (this.player.inBush) {
                 this.player.inBush = false;
                 this.player.setStealthState(stealthStates.visible);
+                this.music.playBackground();
             }
         }
 

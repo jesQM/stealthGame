@@ -85,7 +85,11 @@ class Player extends Character {
     }
 
     changeWeapon( index ) {
-        if ( this.weapons[ index ] != null && this.weapons[ index ] != undefined )
-            this.weapon = this.weapons[index];
+        if ( this.weapons[ index ] != null && this.weapons[ index ] != undefined ) {
+            if ( this.weapon != this.weapons[index]){
+                this.weapon = this.weapons[index];
+                this.weapon.wasEquipped();
+            }
+        }
     }
 }

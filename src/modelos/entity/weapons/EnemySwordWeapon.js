@@ -17,7 +17,7 @@ class EnemySwordWeapon extends Weapon {
         let callbackPreparation = function () {
             this.animationStep++;
             this.damaging = true;
-            if ( this.animationStep >= this.animR.length ) this.animationStep = 0;
+            new AudioManager().playSwordSlash();
 
             if ( this.entity.vx < 0 ) {
                 this.orientationAnimations = this.animL;

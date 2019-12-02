@@ -13,3 +13,7 @@ The game can be found here: https://jesqm.github.io/stealthGame/
 * Bow model: Heather Lee Harvey, EmeraldActivities.com & http://opengameart.org/users/emerald
 * Heart model: NicoleMarieProductions (https://opengameart.org/users/nicole-marie-t)
 * Blood splats: PWL (https://opengameart.org/users/pwl)
+
+###Sound by:
+* Knife sounds: https://opengameart.org/content/knife-sharpening-slice-1, https://opengameart.org/content/knife-sharpening-slice-2
+* Other sounds: Philippe Groarke (https://opengameart.org/content/punches-hits-swords-and-squishes)

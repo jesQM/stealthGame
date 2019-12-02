@@ -54,7 +54,25 @@ var pictures = {
     blood5: "res/blood/bloodsplats_0005_20x20.png",
     blood6: "res/blood/bloodsplats_0006_20x20.png",
     blood7: "res/blood/bloodsplats_0007_20x20.png",
-}
+};
+
+var audio = {
+    background: "res/sound/chicago.wav",
+    background_LPF: "res/sound/chicago_LPF.wav",
+
+    knife1 : "res/sound/fx/knifesharpener1.wav",
+    knife2 : "res/sound/fx/knifesharpener2.wav",
+
+    slash1 : "res/sound/fx/Socapex - new_hits.wav",
+    slash2 : "res/sound/fx/Socapex - new_hits_1.wav",
+    slash3 : "res/sound/fx/Socapex - new_hits_3.wav",
+    slash4 : "res/sound/fx/Socapex - new_hits_4.wav",
+    slash5 : "res/sound/fx/Socapex - small knock.wav",
+    slash6 : "res/sound/fx/Socapex - Swordsmall.wav",
+    slash7 : "res/sound/fx/Socapex - Swordsmall_1.wav",
+    slash8 : "res/sound/fx/Socapex - Swordsmall_2.wav",
+    slash9 : "res/sound/fx/Socapex - Swordsmall_3.wav",
+};
 
 var rutasImagenes = Object.values(pictures);
 cargarImagenes(0);

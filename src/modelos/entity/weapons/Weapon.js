@@ -18,4 +18,8 @@ class Weapon extends Modelo {
     trigger(){
         return null;
     }
+
+    wasEquipped(){
+
+    }
 }
