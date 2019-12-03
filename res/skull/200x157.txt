@@ -1,0 +1,10 @@
+TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
+    at Function.invokeGetter (<anonymous>:2:14)
+    at GameLayer.playerWasKilled (http://localhost:63342/1_javascript/src/layers/GameLayer.js:31:14)
+    at Player.kill (http://localhost:63342/1_javascript/src/modelos/entity/Player.js:84:19)
+    at Player.changePictureToShowHealth (http://localhost:63342/1_javascript/src/modelos/entity/Character.js:69:18)
+    at Player.damage (http://localhost:63342/1_javascript/src/modelos/entity/Character.js:41:14)
+    at Player.damage (http://localhost:63342/1_javascript/src/modelos/entity/Player.js:78:15)
+    at Arrow.actualizar (http://localhost:63342/1_javascript/src/modelos/entity/weapons/EnemyBowWeapon.js:61:33)
+    at GameLayer.actualizar (http://localhost:63342/1_javascript/src/layers/GameLayer.js:84:39)
+    at loop (http://localhost:63342/1_javascript/Main.js:24:11)

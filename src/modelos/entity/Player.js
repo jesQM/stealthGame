@@ -73,8 +73,15 @@ class Player extends Character {
     }
 
     damage(amount) {
+        if ( this.health <= 0 ) return;
+
         super.damage(amount);
         gameLayer.updateHealth();
+    }
+
+    kill() {
+        super.kill();
+        gameLayer.playerWasKilled();
     }
 
     isMovingX() {
