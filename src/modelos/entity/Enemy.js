@@ -174,7 +174,7 @@ class Enemy extends Character {
     removeFromGame(){
         for (var i = 0; i < gameLayer.enemies.length; i++) {
             if ( gameLayer.enemies[i] == this ) {
-                //gameLayer.enemies.splice(i, 1);
+                gameLayer.enemies.splice(i, 1);
                 break;
             }
         }

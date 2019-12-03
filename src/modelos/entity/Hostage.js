@@ -1,11 +1,19 @@
 class Hostage extends Character {
     constructor(x, y){
-        super( pictures.playerW0, x, y );
+        super( pictures.hostageW0, x, y );
 
         this.maxHealth = 50;
         this.health = this.maxHealth;
 
         this.nextHostage = null;
+
+        this.woundedPictures = [
+            pictures.hostageW0,
+            pictures.hostageW0,
+            pictures.hostageW0,
+            pictures.hostageW2,
+            pictures.hostageW2,
+        ];
     }
 
     actualizar() {
@@ -22,5 +30,31 @@ class Hostage extends Character {
                 this.movementStrategy = new FollowModelMovement(this, modelToFollow);
             }
         }
+    }
+
+    getArribaDinamico(){
+        return (this.y - this.alto/2) + this.alto/10;
+    }
+    getAbajoDinamico(){
+        return (this.y + this.alto/2) - this.alto/10;
+    }
+    getDerechaDinamico(){
+        return (this.x + this.ancho/2) - this.ancho/10;
+    }
+    getIzquierdaDinamico(){
+        return (this.x - this.ancho/2) + this.ancho/10;
+    }
+
+    kill() {
+        super.kill();
+        if ( this.nextHostage != null ){
+            this.nextHostage.movementStrategy.modelToFollow = this.movementStrategy.modelToFollow;
+        }
+
+        this.removeFromGame();
+    }
+
+    removeFromGame(){
+        gameLayer.espacio.eliminarCuerpoDinamico(this);
     }
 }
