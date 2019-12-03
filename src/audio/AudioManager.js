@@ -80,12 +80,12 @@ class AudioManager {
         if ( current != null ) current.pause();
     }
 
-    playPersecution(){
+    playPersecution(){ // TODO;
         if ( this.mute ) return;
         this.background.pause();
     }
 
-    stopPersecution(){
+    stopPersecution(){ // TODO;
         if ( this.mute ) return;
         this.background.play();
     }
