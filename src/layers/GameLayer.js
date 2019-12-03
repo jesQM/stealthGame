@@ -40,6 +40,8 @@ class GameLayer extends Layer {
         this.stealthForeground = new Fondo(pictures.stealthLastStep, 480/2, 320/2);
 
         this.updateHealth();
+        for (var i = 0; i < this.enemies.length; i++)
+            this.enemies[i].weapon.addTarget(this.player);
 
         this.espacio.agregarCuerpoDinamico( new Hostage(0,0) );
         this.espacio.agregarCuerpoDinamico( new Hostage(40,0) );

@@ -3,6 +3,8 @@ class EnemyBowWeapon extends Weapon{
         super(pictures.bow, entity);
         this.damage = -25;
         this.cooldown = 50;
+
+        this.targets = [];
     }
 
     trigger(){
@@ -23,12 +25,16 @@ class EnemyBowWeapon extends Weapon{
 
         console.log(x + " - " + y);
         // 2.- Create arrow
-        gameLayer.espacio.agregarCuerpoDinamico( new Arrow( this.entity.x, this.entity.y, -x, -y ) )
+        gameLayer.espacio.agregarCuerpoDinamico( new Arrow( this.entity.x, this.entity.y, -x, -y, this.targets ) )
+    }
+
+    addTarget(target) {
+        this.targets.push(target);
     }
 }
 
 class Arrow extends Modelo{
-    constructor( x, y, vx ,vy ) {
+    constructor( x, y, vx ,vy, targets ) {
         super(pictures.arrow, x, y);
 
         this.inVx = vx;
@@ -37,8 +43,7 @@ class Arrow extends Modelo{
         this.vy = vy;
 
         this.damage = -25;
-        this.targets = [];
-        this.targets.push( gameLayer.player );
+        this.targets = targets;
 
         this.toBeDestroyed = false;
     }

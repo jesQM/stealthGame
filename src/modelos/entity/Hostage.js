@@ -28,6 +28,8 @@ class Hostage extends Character {
 
                 modelToFollow.nextHostage = this;
                 this.movementStrategy = new FollowModelMovement(this, modelToFollow);
+
+                this.addAsTarget();
             }
         }
     }
@@ -56,5 +58,11 @@ class Hostage extends Character {
 
     removeFromGame(){
         gameLayer.espacio.eliminarCuerpoDinamico(this);
+    }
+
+    addAsTarget() {
+        for (let i = 0; i < gameLayer.enemies.length; i++){
+            gameLayer.enemies[i].weapon.addTarget(this);
+        }
     }
 }
