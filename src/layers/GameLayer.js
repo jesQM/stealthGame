@@ -3,6 +3,8 @@ class GameLayer extends Layer {
     constructor() {
         super();
         this.maxLevel = 1;
+        this.points = 0;
+
         this.music = new AudioManager();
         this.music.playBackground();
 
@@ -10,8 +12,22 @@ class GameLayer extends Layer {
     }
 
     finishLevel() {
-        if ( this.levelNumber < this.maxLevel )
+        if ( this.levelNumber < this.maxLevel ) {
+            this.points += this.savedHostages();
             this.start(this.levelNumber + 1);
+            console.log(this.points);
+        }
+    }
+
+    savedHostages() {
+        let count = 0;
+        let modelToFollow = gameLayer.player;
+        while ( modelToFollow.nextHostage != null ) { // Traverse the linked list of hostages
+            modelToFollow = modelToFollow.nextHostage;
+            count++;
+        }
+
+        return count;
     }
 
     start (levelNumber){
