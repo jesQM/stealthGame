@@ -8,6 +8,7 @@ class Character extends Movable {
 
         this.weapon = null;
         this.woundedPictures = [];
+        this.woundCooldown = 0;
     }
 
     actualizar() {

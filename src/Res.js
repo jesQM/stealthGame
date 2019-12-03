@@ -10,6 +10,8 @@ var pictures = {
     enemyW2 : "res/entity/enemy_wound2.png",
     enemyW3 : "res/entity/enemy_wound3.png",
     enemyW4 : "res/entity/enemy_wound4.png",
+    hostageW0 : "res/entity/hostage_wound0.png",
+    hostageW2 : "res/entity/hostage_wound2.png",
     dead : "res/entity/dead.png",
 
     squareVisionArea : "res/squareVisionArea.png",
