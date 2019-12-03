@@ -50,6 +50,8 @@ class AudioManager {
 
     playBackground(){
         if ( this.mute || this.muteMusic ) return;
+        if ( this.background != null && !this.background.audio.paused ) return;
+
         let currentTime = 0;
         if ( this.background_LPF != null ) currentTime = this.background_LPF.audio.currentTime;
 
