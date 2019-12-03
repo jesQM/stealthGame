@@ -40,6 +40,10 @@ class GameLayer extends Layer {
         this.stealthForeground = new Fondo(pictures.stealthLastStep, 480/2, 320/2);
 
         this.updateHealth();
+
+        this.espacio.agregarCuerpoDinamico( new Hostage(0,0) );
+        this.espacio.agregarCuerpoDinamico( new Hostage(40,0) );
+        this.espacio.agregarCuerpoDinamico( new Hostage(0,40) );
     }
 
 
