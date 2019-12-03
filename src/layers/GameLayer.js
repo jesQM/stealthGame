@@ -4,6 +4,7 @@ class GameLayer extends Layer {
         super();
         this.maxLevel = 1;
         this.points = 0;
+        this.playerDeaths = 0;
 
         this.music = new AudioManager();
         this.music.playBackground();
@@ -17,6 +18,11 @@ class GameLayer extends Layer {
             this.start(this.levelNumber + 1);
             console.log(this.points);
         }
+    }
+
+    killPlayer(){
+        this.playerDeaths++;
+        this.start( this.levelNumber );
     }
 
     savedHostages() {
