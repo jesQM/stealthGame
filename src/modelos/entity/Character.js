@@ -8,6 +8,8 @@ class Character extends Movable {
 
         this.weapon = null;
         this.woundedPictures = [];
+        this.woundMaxCooldown = 30;
+        this.woundCooldown = this.woundMaxCooldown;
     }
 
     actualizar() {
@@ -15,6 +17,8 @@ class Character extends Movable {
         if (this.weapon != null) {
             this.weapon.actualizar();
         }
+
+        if ( this.woundCooldown > 0 ) this.woundCooldown--;
     }
 
     dibujar(scrollX, scrollY) {
@@ -36,6 +40,8 @@ class Character extends Movable {
     }
 
     damage( amount ){
+        if ( this.woundCooldown > 0 ) return;
+        this.woundCooldown = this.woundMaxCooldown;
         this.health += amount;
         this.changePictureToShowHealth();
 

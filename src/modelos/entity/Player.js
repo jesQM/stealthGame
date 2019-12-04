@@ -8,6 +8,9 @@ class Player extends Character {
         this.seenBy = [];
         this.hasKey = false;
         this.weapons = [];
+        this.nextHostage = null;
+
+        this.woundMaxCooldown = 0;
 
         this.woundedPictures = [
             pictures.playerW0,

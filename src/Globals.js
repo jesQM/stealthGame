@@ -34,6 +34,7 @@ var enemyFollowStates = {};
     enemyFollowStates.lookAround = 2;
     enemyFollowStates.followPlayer = 3;
     enemyFollowStates.traceStepsBack = 4;
+    enemyFollowStates.followHostage = 5;
 
 var movementStrategyStatus = {};
     movementStrategyStatus.starting = 0;

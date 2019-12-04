@@ -3,6 +3,9 @@ class GameLayer extends Layer {
     constructor() {
         super();
         this.maxLevel = 1;
+        this.points = 0;
+        this.playerDeaths = 0;
+
         this.music = new AudioManager();
         this.music.playBackground();
 
@@ -10,8 +13,27 @@ class GameLayer extends Layer {
     }
 
     finishLevel() {
-        if ( this.levelNumber < this.maxLevel )
+        if ( this.levelNumber < this.maxLevel ) {
+            this.points += this.savedHostages();
             this.start(this.levelNumber + 1);
+            console.log(this.points);
+        }
+    }
+
+    killPlayer(){
+        this.playerDeaths++;
+        this.start( this.levelNumber );
+    }
+
+    savedHostages() {
+        let count = 0;
+        let modelToFollow = gameLayer.player;
+        while ( modelToFollow.nextHostage != null ) { // Traverse the linked list of hostages
+            modelToFollow = modelToFollow.nextHostage;
+            count++;
+        }
+
+        return count;
     }
 
     start (levelNumber){
@@ -40,6 +62,15 @@ class GameLayer extends Layer {
         this.stealthForeground = new Fondo(pictures.stealthLastStep, 480/2, 320/2);
 
         this.updateHealth();
+        for (var i = 0; i < this.enemies.length; i++)
+            this.enemies[i].weapon.addTarget(this.player);
+
+        this.espacio.agregarCuerpoDinamico( new Hostage(0,0) );
+        this.espacio.agregarCuerpoDinamico( new Hostage(40,0) );
+        this.espacio.agregarCuerpoDinamico( new Hostage(0,40) );
+        this.espacio.agregarCuerpoDinamico( new Hostage(0,60) );
+        this.espacio.agregarCuerpoDinamico( new Hostage(0,80) );
+        this.espacio.agregarCuerpoDinamico( new Hostage(0,100) );
     }
 
 
