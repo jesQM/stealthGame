@@ -4,7 +4,7 @@ class FollowPlayerMovement extends MovementStrategy {
         super(objectToManage);
 
         this.modelToFollow = modelToFollow;
-        this.waypointInterval = 5;
+        this.waypointInterval = 3;
         this.waypointTimer = 0;
 
         this.runTimer = true;

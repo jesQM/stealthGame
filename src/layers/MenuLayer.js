@@ -26,6 +26,7 @@ class MenuLayer extends Layer {
     procesarControles(){
         if (controles.continuar) {
             gameLayer.startMusic();
+            gameLayer.startTime = new Date();
             changeLayer( gameLayer );
         }
     }
