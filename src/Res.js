@@ -59,8 +59,8 @@ var pictures = {
 };
 
 var audio = {
-    background: "res/sound/chicago.wav",
-    background_LPF: "res/sound/chicago_LPF.wav",
+    background: "res/sound/chicago.ogg",
+    background_LPF: "res/sound/chicago_LPF.ogg",
 
     knife1 : "res/sound/fx/knifesharpener1.wav",
     knife2 : "res/sound/fx/knifesharpener2.wav",
