@@ -28,7 +28,7 @@ class Player extends Character {
         super.actualizar();
         this.changeOrientation();
         if ( this.seenBy.length == 0 && this.stealthState == stealthStates.seen )
-            this.stealthState = stealthStates.visible;
+            this.setStealthState( stealthStates.visible );
     }
 
     moverX (direccion){
@@ -40,6 +40,16 @@ class Player extends Character {
     }
 
     setStealthState(newState){
+        if ( newState == stealthStates.seen ) {
+            if ( this.stealthState != stealthStates.seen ){
+                gameLayer.music.playPersecution();
+            }
+        } else {
+            if ( this.stealthState == stealthStates.seen ){
+                gameLayer.music.stopPersecution();
+            }
+        }
+
         this.stealthState = newState;
     }
 
