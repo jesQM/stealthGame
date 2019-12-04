@@ -6,6 +6,7 @@ class AudioManager {
         this.muteMusic = false;
         this.mute = false;
 
+        this.persecution = null;
     }
 
     playSwordWeaponSelect(){
@@ -84,14 +85,22 @@ class AudioManager {
         if ( current != null ) current.pause();
     }
 
-    playPersecution(){ // TODO;
-        if ( this.mute ) return;
-        this.background.pause();
+    playPersecution() {
+        if ( this.mute || this.muteMusic ) return;
+
+        this.persecution = new AudioPlayer( audio.background_seen, true );
+        this.persecution.play();
+
+        if ( this.background != null && !this.background.audio.paused ) this.background.pause();
+        if ( this.background_LPF != null && !this.background_LPF.audio.paused ) this.background_LPF.pause();
+
     }
 
-    stopPersecution(){ // TODO;
-        if ( this.mute ) return;
-        this.background.play();
+    stopPersecution() {
+        if ( this.mute || this.muteMusic ) return;
+
+        this.persecution.pause();
+        this.playBackground();
     }
 
     disableSound(){
@@ -103,6 +112,7 @@ class AudioManager {
         this.muteMusic = true;
         if ( this.background != null ) this.background.pause();
         if ( this.background_LPF != null ) this.background_LPF.pause();
+        if ( this.persecution != null ) this.persecution.pause();
     }
 
     enableSound(){
