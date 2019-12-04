@@ -7,7 +7,6 @@ class GameLayer extends Layer {
         this.playerDeaths = 0;
 
         this.music = new AudioManager();
-        this.music.playBackground();
 
         this.start(0);
     }
@@ -34,6 +33,10 @@ class GameLayer extends Layer {
         }
 
         return count;
+    }
+
+    startMusic() {
+        this.music.playBackground();
     }
 
     start (levelNumber){
