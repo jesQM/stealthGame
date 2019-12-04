@@ -80,4 +80,8 @@ class Character extends Movable {
         this.speed = 0;
         this.imagen.src = pictures.dead;
     }
+
+    colisiona(modelo) {
+        return super.colisiona(modelo) && this.health > 0 ;
+    }
 }

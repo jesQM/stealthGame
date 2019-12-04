@@ -8,6 +8,7 @@ class Hostage extends Character {
         this.woundMaxCooldown = 0;
 
         this.nextHostage = null;
+        this.previousHostage = null;
 
         this.woundedPictures = [
             pictures.hostageW0,
@@ -25,10 +26,12 @@ class Hostage extends Character {
 
                 // We follow the last hostage (chainlike)
                 let modelToFollow = gameLayer.player;
-                while ( modelToFollow.nextHostage != null ) // Traverse the linked list of hostages
+                while ( modelToFollow.nextHostage != null ) { // Traverse the linked list of hostages
                     modelToFollow = modelToFollow.nextHostage;
+                }
 
                 modelToFollow.nextHostage = this;
+                this.previousHostage = modelToFollow;
                 this.movementStrategy = new FollowModelMovement(this, modelToFollow);
 
                 this.addAsTarget();
@@ -51,8 +54,11 @@ class Hostage extends Character {
 
     kill() {
         super.kill();
+        this.previousHostage.nextHostage = this.nextHostage;
+
         if ( this.nextHostage != null ){
             this.nextHostage.movementStrategy.modelToFollow = this.movementStrategy.modelToFollow;
+            this.nextHostage.previousHostage = this.previousHostage;
         }
 
         this.removeFromGame();
