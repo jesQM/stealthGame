@@ -15,6 +15,7 @@ var gameLayer;
 function iniciarJuego() {
     menuLayer = new MenuLayer();
     gameLayer = new GameLayer();
+    statsLayer = new StatsLayer();
     layer = menuLayer
     setInterval(loop, 1000 / 30);
 }

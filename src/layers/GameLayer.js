@@ -2,9 +2,10 @@ class GameLayer extends Layer {
 
     constructor() {
         super();
-        this.maxLevel = 1;
+        this.maxLevel = 0;
         this.points = 0;
         this.playerDeaths = 0;
+        this.startTime = 0;
 
         this.music = new AudioManager();
 
@@ -12,10 +13,16 @@ class GameLayer extends Layer {
     }
 
     finishLevel() {
+        this.points += this.savedHostages();
+        this.music.stopPersecution();
         if ( this.levelNumber < this.maxLevel ) {
-            this.points += this.savedHostages();
             this.start(this.levelNumber + 1);
-            console.log(this.points);
+        } else {
+            statsLayer.setTimePlayed( this.startTime );
+            statsLayer.setDeathCount( this.playerDeaths );
+            statsLayer.setPeopleSaved( this.points );
+
+            changeLayer( statsLayer );
         }
     }
 
