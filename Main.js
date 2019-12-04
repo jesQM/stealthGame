@@ -8,12 +8,15 @@ var controles = {};
 
 
 var layer;
+var menuLayer;
 var gameLayer;
 
 // Inicio capas y bucle del juego
 function iniciarJuego() {
+    menuLayer = new MenuLayer();
     gameLayer = new GameLayer();
-    layer = gameLayer
+    statsLayer = new StatsLayer();
+    layer = menuLayer
     setInterval(loop, 1000 / 30);
 }
 
@@ -26,6 +29,9 @@ function loop(){
     layer.dibujar();
 }
 
+function changeLayer( newLayer ){
+    layer = newLayer;
+}
 
 
 // Cambio de escalado

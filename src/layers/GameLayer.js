@@ -2,21 +2,28 @@ class GameLayer extends Layer {
 
     constructor() {
         super();
-        this.maxLevel = 1;
+        this.maxLevel = 0;
         this.points = 0;
         this.playerDeaths = 0;
+        this.startTime = null;
 
         this.music = new AudioManager();
-        this.music.playBackground();
 
         this.start(0);
     }
 
     finishLevel() {
+        this.points += this.savedHostages();
+        this.music.stopPersecution();
         if ( this.levelNumber < this.maxLevel ) {
-            this.points += this.savedHostages();
             this.start(this.levelNumber + 1);
-            console.log(this.points);
+        } else {
+
+            statsLayer.setTimePlayed( this.calculateMinutesPlayed(), this.calculateSecondsPlayed() );
+            statsLayer.setDeathCount( this.playerDeaths );
+            statsLayer.setPeopleSaved( this.points );
+
+            changeLayer( statsLayer );
         }
     }
 
@@ -34,6 +41,10 @@ class GameLayer extends Layer {
         }
 
         return count;
+    }
+
+    startMusic() {
+        this.music.playBackground();
     }
 
     start (levelNumber){
@@ -253,5 +264,25 @@ class GameLayer extends Layer {
         let offsetX = Math.floor((Math.random() * 21) - 10);
         let offsetY = Math.floor((Math.random() * 21) - 10);
         this.visualEffects.push( new VisualEffect( pic, x + offsetX, y + offsetY, 120 ) );
+    }
+
+    calculateMinutesPlayed() {
+        let start = this.startTime.getTime();
+        let end = new Date().getTime();
+
+        let millisecondsPlayed = end - start;
+        let seconds = millisecondsPlayed / 1000;
+
+        return Math.floor(seconds/60);
+    }
+
+    calculateSecondsPlayed() {
+        let start = this.startTime.getTime();
+        let end = new Date().getTime();
+
+        let millisecondsPlayed = end - start;
+        let seconds = millisecondsPlayed / 1000;
+
+        return Math.floor(seconds % 60);
     }
 }

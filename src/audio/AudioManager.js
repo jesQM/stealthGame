@@ -87,7 +87,9 @@ class AudioManager {
 
     playPersecution() {
         if ( this.mute || this.muteMusic ) return;
+        if ( this.persecution != null && !this.persecution.audio.paused && !this.persecution.audioTerminating) return;
 
+        if ( this.persecution != null && this.persecution.audioTerminating ) this.persecution.pause();
         this.persecution = new AudioPlayer( audio.background_seen, true );
         this.persecution.play();
 
@@ -98,9 +100,10 @@ class AudioManager {
 
     stopPersecution() {
         if ( this.mute || this.muteMusic ) return;
+        if ( this.persecution == null || this.persecution.audio.paused ) return;
 
-        this.persecution.pause();
         this.playBackground();
+        this.persecution.reduceVolume();
     }
 
     disableSound(){

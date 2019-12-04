@@ -2,6 +2,7 @@ class AudioPlayer {
     constructor(src, loop = false){
         this.audio = new Audio(src);
         this.audio.loop = loop;
+        this.audioTerminating = false;
     }
 
     play(){
@@ -10,5 +11,18 @@ class AudioPlayer {
 
     pause(){
         this.audio.pause();
+    }
+
+    reduceVolume(){
+        let reduceAmount = 0.1;
+        this.audioTerminating = true;
+        setInterval(function () {
+            if ( this.audio.volume-reduceAmount > 0 && !this.audio.paused) {
+                this.audio.volume -= reduceAmount;
+            } else {
+                this.pause();
+                clearInterval();
+            }
+        }.bind(this), 1000 / 5);
     }
 }
