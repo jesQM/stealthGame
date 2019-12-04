@@ -95,4 +95,17 @@ class AbstractSword extends Weapon {
     wasEquipped(){
         gameLayer.music.playSwordWeaponSelect();
     }
+
+    addTarget(target) {
+        this.targets.push(target);
+    }
+    
+    removeTarget(target) {
+        for (let i = 0; i < this.targets.length; i++){
+            if ( this.targets[i] != null && this.targets[i] == target ) {
+                this.targets.splice(i, 1);
+                i--;
+            }
+        }
+    }
 }

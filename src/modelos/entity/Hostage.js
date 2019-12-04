@@ -5,6 +5,8 @@ class Hostage extends Character {
         this.maxHealth = 50;
         this.health = this.maxHealth;
 
+        this.woundMaxCooldown = 0;
+
         this.nextHostage = null;
 
         this.woundedPictures = [
@@ -58,6 +60,9 @@ class Hostage extends Character {
 
     removeFromGame(){
         gameLayer.espacio.eliminarCuerpoDinamico(this);
+        for (let i = 0; i < gameLayer.enemies.length; i++){
+            gameLayer.enemies[i].weapon.removeTarget(this);
+        }
     }
 
     addAsTarget() {

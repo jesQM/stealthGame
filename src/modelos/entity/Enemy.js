@@ -2,9 +2,6 @@ class Enemy extends Character {
     constructor(img, x ,y) {
         super(img, x ,y);
 
-        this.woundCooldown = 0;
-        this.woundMaxCooldown = 30;
-
         this.totalMaxSpeed = 2.5;
         this.currentMaxSpeed = this.totalMaxSpeed;
         this.speed = this.currentMaxSpeed;
@@ -42,7 +39,15 @@ class Enemy extends Character {
                 this.speed = this.currentMaxSpeed;
         }
 
+        // Attack
+        if ( (this.followState == enemyFollowStates.followPlayer || this.followState == enemyFollowStates.followHostage))
+            if ( this.movementStrategy.modelToFollow != null && (this.movementStrategy.modelToFollow.stealthState === undefined || gameLayer.player.stealthState != stealthStates.hidden) )
+                if (this.visionArea.colisiona(this.movementStrategy.modelToFollow) && !this.isWallBlocking(this.movementStrategy.modelToFollow))
+                    this.weapon.trigger();
+
         if ( this.woundCooldown > 0 ) this.woundCooldown--;
+
+        this.manageMovement();
     }
 
     dibujar(scrollX, scrollY) {
@@ -106,10 +111,82 @@ class Enemy extends Character {
         return (this.x - this.ancho/2) + this.ancho/10;
     }
 
+    manageMovement() {
+        // FOLLOW STATE
+        if ( gameLayer.player.stealthState != stealthStates.hidden && this.visionArea.colisiona(gameLayer.player) && !this.isWallBlocking()){ // if we see the player
+            gameLayer.player.setStealthState( stealthStates.seen );
+            gameLayer.player.seenBy.push(this);
+
+            if (this.followState != enemyFollowStates.followPlayer) { // and we are not following it => follow it
+                if (this.movementStrategy.status != movementStrategyStatus.finished) {
+                    this.movementStrategy.finishStrategy();
+                    this.interruptedMovementStates.push(this.followState);
+                    this.interruptedMovementStrategy.push(this.movementStrategy);
+                }
+                this.movementStrategy = new FollowPlayerMovement(this);
+                this.followState = enemyFollowStates.followPlayer;
+            } else {
+
+                // If we see the player we run to its position
+                this.movementStrategy.runTimer = true;
+            }
+
+        } else { // if we dont see the player
+
+            if (this.followState == enemyFollowStates.followPlayer) {
+                this.movementStrategy.runTimer = false; // if we were following the player, the strategy was FollowThePlayer, this makes it to stop tracking
+
+                for (var i = 0; i<gameLayer.player.seenBy.length; i++)
+                { // we remove ourselves from the "we see player" list
+                    if (gameLayer.player.seenBy[i] == this) {
+                        gameLayer.player.seenBy.splice(i,1);
+                        i--;
+                    }
+                }
+            }
+
+            if ( this.followState == enemyFollowStates.followHostage ) {
+                if ( this.visionArea.colisiona( this.movementStrategy.modelToFollow ) && !this.isWallBlocking( this.movementStrategy.modelToFollow ) ) {
+                        this.movementStrategy.runTimer = true;
+                } else { // we lost the hostage
+                    this.movementStrategy.runTimer = false;
+                    let target = this.lookForHostageTarget();
+                    if ( target != null ) {
+                        this.movementStrategy.modelToFollow = target;
+                        this.movementStrategy.runTimer = true;
+                    }
+                }
+
+            } else {
+                let target = this.lookForHostageTarget();
+                if ( target != null ) {
+                    if (this.movementStrategy.status != movementStrategyStatus.finished) {
+                        this.movementStrategy.finishStrategy();
+                        this.interruptedMovementStates.push(this.followState);
+                        this.interruptedMovementStrategy.push(this.movementStrategy);
+                    }
+                    this.movementStrategy = new FollowPlayerMovement(this, target);
+                    this.followState = enemyFollowStates.followHostage;
+                }
+            }
+        }
+
+        this.changeState();
+    }
+
+    lookForHostageTarget() {
+        for (let i = 0; i < this.weapon.targets.length; i++) {
+            if ( this.weapon.targets[i] != null && this.weapon.targets[i] != gameLayer.player ){
+                if ( this.visionArea.colisiona( this.weapon.targets[i] ) && !this.isWallBlocking( this.weapon.targets[i] ) ) {
+                    return this.weapon.targets[i];
+                }
+            }
+        }
+        return null;
+    }
+
     damage( amount ){
         if ( this.woundCooldown > 0 ) return;
-        this.woundCooldown = this.woundMaxCooldown;
-
         super.damage(amount);
 
         this.adjustMaxSpeed();
@@ -181,7 +258,7 @@ class Enemy extends Character {
         gameLayer.espacio.eliminarCuerpoDinamico(this);
     }
 
-    manageMovement(){
+    changeState(){
         if (this.movementStrategy.status == movementStrategyStatus.finished) {
             switch ( this.followState ) {
                 case enemyFollowStates.patrol:
@@ -202,24 +279,29 @@ class Enemy extends Character {
                     this.movementStrategy = new LookAroundMovement(this);
                     this.followState = enemyFollowStates.lookAround;
                     break;
+
+                case enemyFollowStates.followHostage:
+                    this.movementStrategy = new LookAroundMovement(this);
+                    this.followState = enemyFollowStates.lookAround;
+                    break;
             }
         }
     }
 
-    isWallBlocking() {
+    isWallBlocking( target = gameLayer.player ) {
         //console.log("is blocking?");
-        let playerX = gameLayer.player.x;
-        let playerY = gameLayer.player.y;
+        let playerX = target.x;
+        let playerY = target.y;
 
         let bot = this.y+this.alto/2;
         let top = this.y-this.alto/2;
         let right = this.x+this.ancho/2;
         let left = this.x-this.ancho/2;
 
-        let botP = playerY+gameLayer.player.alto/2;
-        let topP = playerY-gameLayer.player.alto/2;
-        let rightP = playerX+gameLayer.player.ancho/2;
-        let leftP = playerX-gameLayer.player.ancho/2;
+        let botP = playerY + target.alto/2;
+        let topP = playerY - target.alto/2;
+        let rightP = playerX + target.ancho/2;
+        let leftP = playerX - target.ancho/2;
 
         let bloques = gameLayer.espacio.estaticos;
         for (var i = 0; i < bloques.length; i++){ // for all walls
@@ -240,8 +322,7 @@ class Enemy extends Character {
                         ( Ebot > bot && Eright > right &&   topP > Etop && Eleft < leftP ) || // P en bot derecha
                         ( Ebot > bot && Eleft < left   &&   topP > Etop && Eright > rightP ))
                 ) {
-                    // something blocks
-                    //console.log("tapado");
+
                     return true;
                 }
             }

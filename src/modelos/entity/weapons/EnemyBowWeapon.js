@@ -17,8 +17,8 @@ class EnemyBowWeapon extends Weapon{
 
     fireArrow() {
         // 1.- Calculate acceleration on x and y
-        let x = (this.entity.x - gameLayer.player.x);
-        let y = (this.entity.y - gameLayer.player.y);
+        let x = (this.entity.x - this.entity.movementStrategy.modelToFollow.x);
+        let y = (this.entity.y - this.entity.movementStrategy.modelToFollow.y);
 
         x = x/20;
         y = y/20;
@@ -30,6 +30,15 @@ class EnemyBowWeapon extends Weapon{
 
     addTarget(target) {
         this.targets.push(target);
+    }
+
+    removeTarget(target) {
+        for (let i = 0; i < this.targets.length; i++){
+            if ( this.targets[i] != null && this.targets[i] == target ) {
+                this.targets.splice(i, 1);
+                i--;
+            }
+        }
     }
 }
 
@@ -58,8 +67,8 @@ class Arrow extends Modelo{
 
         for ( var i = 0; i < this.targets.length; i++ ) {
             if ( this.targets[i] != null && this.colisiona( this.targets[i] ) ) {
-                this.targets[i].damage( this.damage );
                 this.targets[i].woundCooldown = 0;
+                this.targets[i].damage( this.damage );
                 gameLayer.espacio.eliminarCuerpoDinamico(this);
                 break;
             }

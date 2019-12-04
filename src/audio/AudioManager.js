@@ -63,6 +63,8 @@ class AudioManager {
 
     playBackgroundBush(){
         if ( this.mute || this.muteMusic ) return;
+        if ( this.background_LPF != null && !this.background_LPF.audio.paused ) return;
+
         let currentTime = 0;
         if ( this.background != null ) currentTime = this.background.audio.currentTime;
 
