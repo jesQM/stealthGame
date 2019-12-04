@@ -40,8 +40,4 @@ class EnemySwordWeapon extends AbstractSword {
         this.cooldown = 50;
         this.targets = [];
     }
-
-    addTarget(target) {
-        this.targets.push(target);
-    }
 }

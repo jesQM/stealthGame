@@ -9,13 +9,4 @@ class BowEnemy extends Enemy {
         this.currentMaxSpeed = this.totalMaxSpeed;
         this.speed = this.currentMaxSpeed;
     }
-
-    actualizar() {
-        super.actualizar();
-        //this.weapon.actualizar();
-
-        if ( gameLayer.player.stealthState != stealthStates.hidden && this.visionArea.colisiona(gameLayer.player) && !this.isWallBlocking() ) {
-            this.weapon.trigger();
-        }
-    }
 }

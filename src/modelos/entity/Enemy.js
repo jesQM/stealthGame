@@ -2,9 +2,6 @@ class Enemy extends Character {
     constructor(img, x ,y) {
         super(img, x ,y);
 
-        this.woundCooldown = 0;
-        this.woundMaxCooldown = 30;
-
         this.totalMaxSpeed = 2.5;
         this.currentMaxSpeed = this.totalMaxSpeed;
         this.speed = this.currentMaxSpeed;
@@ -41,6 +38,12 @@ class Enemy extends Character {
             if (this.speed > this.currentMaxSpeed)
                 this.speed = this.currentMaxSpeed;
         }
+
+        // Attack
+        if ( (this.followState == enemyFollowStates.followPlayer || this.followState == enemyFollowStates.followHostage))
+            if ( this.movementStrategy.modelToFollow != null && (this.movementStrategy.modelToFollow.stealthState === undefined || gameLayer.player.stealthState != stealthStates.hidden) )
+                if (this.visionArea.colisiona(this.movementStrategy.modelToFollow) && !this.isWallBlocking(this.movementStrategy.modelToFollow))
+                    this.weapon.trigger();
 
         if ( this.woundCooldown > 0 ) this.woundCooldown--;
 
@@ -125,8 +128,6 @@ class Enemy extends Character {
             } else {
 
                 // If we see the player we run to its position
-                this.movementStrategy.targetX = gameLayer.player.x;
-                this.movementStrategy.targetY = gameLayer.player.y;
                 this.movementStrategy.runTimer = true;
             }
 
@@ -144,18 +145,48 @@ class Enemy extends Character {
                 }
             }
 
-            for (let i = 0; i < this.weapon.targets.length; i++) {
-                // TODO;
+            if ( this.followState == enemyFollowStates.followHostage ) {
+                if ( this.visionArea.colisiona( this.movementStrategy.modelToFollow ) && !this.isWallBlocking( this.movementStrategy.modelToFollow ) ) {
+                        this.movementStrategy.runTimer = true;
+                } else { // we lost the hostage
+                    this.movementStrategy.runTimer = false;
+                    let target = this.lookForHostageTarget();
+                    if ( target != null ) {
+                        this.movementStrategy.modelToFollow = target;
+                        this.movementStrategy.runTimer = true;
+                    }
+                }
+
+            } else {
+                let target = this.lookForHostageTarget();
+                if ( target != null ) {
+                    if (this.movementStrategy.status != movementStrategyStatus.finished) {
+                        this.movementStrategy.finishStrategy();
+                        this.interruptedMovementStates.push(this.followState);
+                        this.interruptedMovementStrategy.push(this.movementStrategy);
+                    }
+                    this.movementStrategy = new FollowPlayerMovement(this, target);
+                    this.followState = enemyFollowStates.followHostage;
+                }
             }
         }
 
         this.changeState();
     }
 
+    lookForHostageTarget() {
+        for (let i = 0; i < this.weapon.targets.length; i++) {
+            if ( this.weapon.targets[i] != null && this.weapon.targets[i] != gameLayer.player ){
+                if ( this.visionArea.colisiona( this.weapon.targets[i] ) && !this.isWallBlocking( this.weapon.targets[i] ) ) {
+                    return this.weapon.targets[i];
+                }
+            }
+        }
+        return null;
+    }
+
     damage( amount ){
         if ( this.woundCooldown > 0 ) return;
-        this.woundCooldown = this.woundMaxCooldown;
-
         super.damage(amount);
 
         this.adjustMaxSpeed();
@@ -245,6 +276,11 @@ class Enemy extends Character {
                     break;
 
                 case enemyFollowStates.followPlayer:
+                    this.movementStrategy = new LookAroundMovement(this);
+                    this.followState = enemyFollowStates.lookAround;
+                    break;
+
+                case enemyFollowStates.followHostage:
                     this.movementStrategy = new LookAroundMovement(this);
                     this.followState = enemyFollowStates.lookAround;
                     break;
