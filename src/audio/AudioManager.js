@@ -23,7 +23,7 @@ class AudioManager {
 
     playShieldWeaponSelect() {
         if ( this.mute ) return;
-        //TODO;
+        this.playShieldBlock();
     }
 
     playSwordSlash(){
@@ -46,7 +46,17 @@ class AudioManager {
 
     playShieldBlock(){
         if ( this.mute ) return;
-        //TODO;
+
+        let possibleSounds = [];
+            possibleSounds.push( audio.shield1 );
+            possibleSounds.push( audio.shield2 );
+            possibleSounds.push( audio.shield3 );
+            possibleSounds.push( audio.shield4 );
+            possibleSounds.push( audio.shield5 );
+
+        let index = Math.floor((Math.random() * possibleSounds.length))
+
+        new AudioPlayer( possibleSounds[ index ] ).play();
     }
 
     playBackground(){

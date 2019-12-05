@@ -79,6 +79,12 @@ var audio = {
     slash7 : "res/sound/fx/Socapex - Swordsmall_1.wav",
     slash8 : "res/sound/fx/Socapex - Swordsmall_2.wav",
     slash9 : "res/sound/fx/Socapex - Swordsmall_3.wav",
+
+    shield1 : "res/sound/fx/Shield_block1.ogg",
+    shield2 : "res/sound/fx/Shield_block2.ogg",
+    shield3 : "res/sound/fx/Shield_block3.ogg",
+    shield4 : "res/sound/fx/Shield_block4.ogg",
+    shield5 : "res/sound/fx/Shield_block5.ogg",
 };
 
 var uncachedAudio = {

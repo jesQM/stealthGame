@@ -272,6 +272,6 @@ class GameLayer extends Layer {
 
         let offsetX = Math.floor((Math.random() * 21) - 10);
         let offsetY = Math.floor((Math.random() * 21) - 10);
-        this.visualEffects.push( new VisualEffect( pic, x + offsetX, y + offsetY, 120 ) );
+        this.visualEffects.push( new VisualEffect( pic, x + offsetX, y + offsetY, 200 ) );
     }
 }
