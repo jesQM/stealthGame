@@ -52,9 +52,7 @@ to a fraction of their total speed (in other words: a nearly dead enemy will wal
 
 ##### Bushes
 <p align="center">
-  <a href="https://gitpoint.co/">
-    <img alt="Player in Bush" title="Player in Bush" src="./res/samppleImages/bush.png">
-  </a>
+    <img alt="Player in Bush"  src="./res/sampleImages/bush.png">
 </p>
 * Bushes will hide the player from enemies (the player, not the hostages).
 * You cannot hide while being followed by an enemy, you must lose it first.
