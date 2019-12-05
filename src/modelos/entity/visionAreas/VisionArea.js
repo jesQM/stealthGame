@@ -4,7 +4,6 @@ class VisionArea extends Modelo {
         super(img, x, y);
 
         this.isVisible = true;
-        //this.collider = new DefaultCollider(this);
     }
 
     dibujar(scrollX, scrollY) {

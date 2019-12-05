@@ -69,9 +69,11 @@ class StatsLayer extends Layer {
             new Texto("* Heart model: NicoleMarieProductions (https://opengameart.org/users/nicole-marie-t)", 20, 160,"10px Arial"  ),
             new Texto("* Blood splats: PWL (https://opengameart.org/users/pwl)", 20, 180,"10px Arial"  ),
             new Texto("Sounds:", 10, 210 ),
-            new Texto("* Knife sounds: https://opengameart.org/content/knife-sharpening-slice-1, and knife-sharpening-slice-2", 20, 240,"10px Arial"  ),
-            new Texto("* Other sounds: Philippe Groarke (https://opengameart.org/content/punches-hits-swords-and-squishes)", 20, 260,"10px Arial"  ),
-            new Texto("* Background track: Perfect Dark (N64 year:2000) Chicago theme.", 20, 280,"10px Arial"  ),
+            new Texto("* Knife sounds: https://opengameart.org/content/knife-sharpening-slice-1, and knife-sharpening-slice-2", 20, 230,"10px Arial"  ),
+            new Texto("* Critical hit sound: Team fortress 2 critical hit sound effect.", 20, 250,"10px Arial"  ),
+            new Texto("* Shield sounds: Minecraft shield sounds.", 20, 270,"10px Arial"  ),
+            new Texto("* Other sounds: Philippe Groarke (https://opengameart.org/content/punches-hits-swords-and-squishes)", 20, 290,"10px Arial"  ),
+            new Texto("* Background track: Perfect Dark (N64 year:2000) Chicago theme.", 20, 310,"10px Arial"  ),
         ];
     }
 

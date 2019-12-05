@@ -85,6 +85,8 @@ var audio = {
     shield3 : "res/sound/fx/Shield_block3.ogg",
     shield4 : "res/sound/fx/Shield_block4.ogg",
     shield5 : "res/sound/fx/Shield_block5.ogg",
+
+    critical : "res/sound/fx/Critical.mp3",
 };
 
 var uncachedAudio = {

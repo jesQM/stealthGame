@@ -116,6 +116,11 @@ class AudioManager {
         this.persecution.reduceVolume();
     }
 
+    playCriticalHit(){
+        if ( this.mute ) return;
+        new AudioPlayer( audio.critical ).play();
+    }
+
     disableSound(){
         this.mute = true;
         this.disableMusic();

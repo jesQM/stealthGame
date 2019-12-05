@@ -226,7 +226,7 @@ class GameLayer extends Layer {
         if ( this.player.stealthState == stealthStates.hidden ) {
             for (var i = 0; i < damaged.length; i++){
                 damaged[i].kill(); // crit!
-                console.log("Crit!");
+                this.music.playCriticalHit();
             }
         }
     }
