@@ -25,7 +25,7 @@ class GameLayer extends Layer {
     }
 
     playerWasKilled(){
-        this.playerDeaths++;
+        this.stats.playerDeaths++;
         this.playerAlive = false;
 
         let animSkull = new Animacion(pictures.skullAnim, 200, 157, 6, 5, function () {
