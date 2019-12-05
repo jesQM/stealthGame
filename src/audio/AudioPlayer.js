@@ -1,6 +1,7 @@
 class AudioPlayer {
     constructor(src, loop = false){
-        this.audio = new Audio(src);
+        //this.audio = new Audio(src);
+        this.audio = cacheAudio[src];
         this.audio.loop = loop;
         this.audioTerminating = false;
     }
