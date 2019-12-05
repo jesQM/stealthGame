@@ -27,9 +27,13 @@ var pictures = {
     llave : "res/mapElements/llave.png",
     door : "res/mapElements/door.png",
     bow : "res/bow.png",
-    arrow : "res/arrow.png",
     heart : "res/heart.png",
     skullAnim : "res/skull/skullAnim.png",
+
+    arrowU : "res/arrow/arrowU.png",
+    arrowD : "res/arrow/arrowD.png",
+    arrowL : "res/arrow/arrowL.png",
+    arrowR : "res/arrow/arrowR.png",
 
     swordR: "res/swordAnim/swordR.png",
     swordL: "res/swordAnim/swordL.png",

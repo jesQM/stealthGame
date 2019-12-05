@@ -1,6 +1,7 @@
 class ShieldWeapon extends Weapon {
     constructor(entity){
         super(pictures.shieldU, entity);
+        this.lastOrientation = 0;
     }
 
     actualizar() {
@@ -10,8 +11,10 @@ class ShieldWeapon extends Weapon {
         this.checkReflectArrow();
     }
 
-    changePosition() {
-        switch (this.entity.orientation) {
+    changePosition(orientation = this.entity.orientation) {
+        if ( orientation > 3 ) orientation = this.lastOrientation;
+
+        switch (orientation) {
             case orientations.up:
                 this.y = this.entity.getAbajoDinamico();
                 this.x = this.entity.x;
@@ -35,6 +38,7 @@ class ShieldWeapon extends Weapon {
             default:
                 break;
         }
+        this.lastOrientation = orientation;
     }
 
     changePic(imagenRuta) {
@@ -62,6 +66,7 @@ class ShieldWeapon extends Weapon {
         for ( var i = 0; i < gameLayer.enemies.length; i++ ){
             dinamico.targets.push( gameLayer.enemies[i] );
         }
+        dinamico.arrowSetPicture();
     }
 
     wasEquipped(){

@@ -19,11 +19,12 @@ class EnemyBowWeapon extends Weapon{
         let x = (this.entity.x - this.entity.movementStrategy.modelToFollow.x);
         let y = (this.entity.y - this.entity.movementStrategy.modelToFollow.y);
 
-        x = x/20;
-        y = y/20;
+
+        let xNormal = x/( Math.sqrt( Math.pow(x,2) + Math.pow(y,2) ) );
+        let yNormal = y/( Math.sqrt( Math.pow(x,2) + Math.pow(y,2) ) );
 
         // 2.- Create arrow
-        gameLayer.espacio.agregarCuerpoDinamico( new Arrow( this.entity.x, this.entity.y, -x, -y, this.targets ) )
+        gameLayer.espacio.agregarCuerpoDinamico( new Arrow( this.entity.x, this.entity.y, -xNormal, -yNormal, this.targets ) )
     }
 
     addTarget(target) {
@@ -42,17 +43,21 @@ class EnemyBowWeapon extends Weapon{
 
 class Arrow extends Modelo{
     constructor( x, y, vx ,vy, targets ) {
-        super(pictures.arrow, x, y);
+        super(pictures.arrowU, x, y);
 
-        this.inVx = vx;
-        this.inVy = vy;
-        this.vx = vx;
-        this.vy = vy;
+        this.speed = 3.5;
+
+        this.inVx = vx * this.speed;
+        this.inVy = vy * this.speed;
+        this.vx = vx * this.speed;
+        this.vy = vy * this.speed;
 
         this.damage = -25;
         this.targets = targets;
 
         this.toBeDestroyed = false;
+
+        this.arrowSetPicture();
     }
 
     actualizar() {
@@ -75,5 +80,40 @@ class Arrow extends Modelo{
 
     stoppedByStaticObject(staticObject) {
         this.toBeDestroyed = true;
+    }
+
+    arrowSetPicture() {
+        let newPic = null;
+
+        if ( this.vx > 0 ) {
+            // To the right
+            if ( this.vx > this.vy ){
+                // to the right
+                newPic = cache[ pictures.arrowR ];
+
+            } else {
+                if ( this.vy > 0 )
+                    newPic = cache[ pictures.arrowD ];
+                else
+                    newPic = cache[ pictures.arrowU ];
+
+            }
+
+        } else {
+            // To the left
+            if ( this.vx < this.vy ){
+                // to the left
+                newPic = cache[ pictures.arrowL ];
+
+            } else {
+                if ( this.vy > 0 )
+                    newPic = cache[ pictures.arrowD ];
+                else
+                    newPic = cache[ pictures.arrowU ];
+            }
+
+        }
+
+        this.imagen = newPic;
     }
 }

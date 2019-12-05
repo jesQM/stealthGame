@@ -22,9 +22,6 @@ class Player extends Character {
     }
 
     actualizar() {
-
-        console.log("player: " + this.x + " - " + this.y);
-
         super.actualizar();
         this.changeOrientation();
         if ( this.seenBy.length == 0 && this.stealthState == stealthStates.seen )
