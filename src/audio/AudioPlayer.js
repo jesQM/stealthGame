@@ -1,7 +1,7 @@
 class AudioPlayer {
     constructor(src, loop = false){
-        //this.audio = new Audio(src);
-        this.audio = cacheAudio[src];
+        this.audio = new Audio(src);
+        //this.audio = cacheAudio[src];
         this.audio.loop = loop;
         this.audioTerminating = false;
     }
@@ -17,12 +17,12 @@ class AudioPlayer {
     reduceVolume(){
         let reduceAmount = 0.1;
         this.audioTerminating = true;
-        setInterval(function () {
+        let intervalId = setInterval(function () {
             if ( this.audio.volume-reduceAmount > 0 && !this.audio.paused) {
                 this.audio.volume -= reduceAmount;
             } else {
                 this.pause();
-                clearInterval();
+                clearInterval(intervalId);
             }
         }.bind(this), 1000 / 5);
     }

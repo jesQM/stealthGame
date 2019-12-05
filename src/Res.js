@@ -29,6 +29,7 @@ var pictures = {
     bow : "res/bow.png",
     arrow : "res/arrow.png",
     heart : "res/heart.png",
+    skullAnim : "res/skull/skullAnim.png",
 
     swordR: "res/swordAnim/swordR.png",
     swordL: "res/swordAnim/swordL.png",

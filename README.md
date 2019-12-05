@@ -27,6 +27,7 @@ load (does weight quite a lot for a web page).
 * Bow model: Heather Lee Harvey, EmeraldActivities.com & http://opengameart.org/users/emerald
 * Heart model: NicoleMarieProductions (https://opengameart.org/users/nicole-marie-t)
 * Blood splats: PWL (https://opengameart.org/users/pwl)
+* Skull model: pechvogel (https://opengameart.org/users/pechvogel)
 
 ### Sound by:
 * Knife sounds: https://opengameart.org/content/knife-sharpening-slice-1, https://opengameart.org/content/knife-sharpening-slice-2

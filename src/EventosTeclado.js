@@ -39,8 +39,6 @@ function onKeyDown( event) {
             case 78:
                 controles.muteMusic = true;
                 break;
-            default:
-                console.log(event.keyCode);
         }
 
     }
