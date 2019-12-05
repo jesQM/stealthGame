@@ -32,6 +32,10 @@ as weapons, key, door and hostages are close to the player.
 * Sword and Shield can be selected and used as a weapon.
 * Swords damage enemies you stand near when pressing space, after a brief delay.
 * Shields may only be used to deflect incoming arrows.
+<p align="center">
+    <img src="./res/sampleImages/deflect.gif">
+</p>
+
 * The key must be picked up in order to open the door that leads to the next level.
 
 ##### Enemies
@@ -43,8 +47,15 @@ If the player is seen, the background music will change.
 * Bow enemies will slowly walk towards the player or hostages if seen, shooting arrows at them.
 * If an enemy receives damage, they will stagger, so their speed will decrease briefly and increase back 
 to a fraction of their total speed (in other words: a nearly dead enemy will walk much slower than a full health one).
+<p align="center">
+    <img src="./res/sampleImages/enemySpeed.gif">
+</p>
 
 ##### Hostages
+<p align="center">
+    <img src="./res/sampleImages/hostage.gif">
+</p>
+
 * Hostages may be rescued to earn points (green circles).
 * Hostages must be delivered alive to the door in order to earn points.
 * Hostages will follow the player chain-like (following the last hostage).
@@ -52,12 +63,16 @@ to a fraction of their total speed (in other words: a nearly dead enemy will wal
 
 ##### Bushes
 <p align="center">
-    <img alt="Player in Bush"  src="./res/sampleImages/bush.png">
+    <img alt="Player in Bush"  src="./res/sampleImages/bush.gif">
 </p>
+
 * Bushes will hide the player from enemies (the player, not the hostages).
 * You cannot hide while being followed by an enemy, you must lose it first.
 * You can notice you are hidden due to the reduced view of the map you have and the slight music change.
 * While hidden, you can perform a critical hit to an enemy; attacking an enemy will deal a killing blow.
+<p align="center">
+    <img src="./res/sampleImages/critical.gif">
+</p>
 
 ### External models by:
 * Key model: https://opengameart.org/users/armisius
