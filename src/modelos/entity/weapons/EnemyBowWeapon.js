@@ -12,7 +12,6 @@ class EnemyBowWeapon extends Weapon{
             this.timer = this.cooldown;
             this.fireArrow();
         }
-        return null;
     }
 
     fireArrow() {

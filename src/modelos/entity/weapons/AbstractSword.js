@@ -89,7 +89,6 @@ class AbstractSword extends Weapon {
             this.timer = this.cooldown;
             this.animationStep++;
         }
-        return null;
     }
 
     wasEquipped(){

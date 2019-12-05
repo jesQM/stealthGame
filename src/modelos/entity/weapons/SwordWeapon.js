@@ -11,4 +11,13 @@ class SwordWeapon extends AbstractSword {
             this.targets.push(gameLayer.enemies[i]);
         }
     }
+
+    trigger(){
+        if (this.timer == 0) {
+            this.timer = this.cooldown;
+            this.animationStep++;
+
+            gameLayer.stats.timesSlashed++;
+        }
+    }
 }

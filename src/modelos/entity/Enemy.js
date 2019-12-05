@@ -244,6 +244,7 @@ class Enemy extends Character {
             }
         }
 
+        gameLayer.stats.enemiesKilled++;
         this.removeFromGame();
     }
 

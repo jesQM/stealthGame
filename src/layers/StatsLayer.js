@@ -9,9 +9,14 @@ class StatsLayer extends Layer {
         this.textDeathCount = new Texto("You died: x times", 20, 70 );
         this.textPeopleSaved = new Texto("You saved: x hostages", 20, 100 );
 
+        this.textEnemiesKilled = new Texto("You killed: x enemies", 20, 140 );
+        this.textTimesSlashed = new Texto("You slashed: x times", 20, 170 );
+
         this.texts.push( this.textTimePlayed );
         this.texts.push( this.textDeathCount );
         this.texts.push( this.textPeopleSaved );
+        this.texts.push( this.textEnemiesKilled );
+        this.texts.push( this.textTimesSlashed );
 
         this.counter = 15;
     }
@@ -46,6 +51,13 @@ class StatsLayer extends Layer {
     setPeopleSaved( number ) {
         this.textPeopleSaved.valor = "You saved: "+number+" hostages";
     }
+    setEnemiesKilled(enemiesKilled) {
+        this.textEnemiesKilled.valor = "You killed: "+enemiesKilled+" enemies";
+    }
+
+    setTimesSlashed(timesSlashed) {
+        this.textTimesSlashed.valor = "You slashed: "+timesSlashed+" times";
+    }
 
     getCredits() {
         return [
@@ -61,5 +73,46 @@ class StatsLayer extends Layer {
             new Texto("* Other sounds: Philippe Groarke (https://opengameart.org/content/punches-hits-swords-and-squishes)", 20, 260,"10px Arial"  ),
             new Texto("* Background track: Perfect Dark (N64 year:2000) Chicago theme.", 20, 280,"10px Arial"  ),
         ];
+    }
+
+    calculate(){
+        this.setTimePlayed( this.stats.calculateMinutesPlayed(), this.stats.calculateSecondsPlayed() );
+        this.setDeathCount( this.stats.playerDeaths );
+        this.setPeopleSaved( this.stats.points );
+
+        this.setEnemiesKilled( this.stats.enemiesKilled );
+        this.setTimesSlashed( this.stats.timesSlashed );
+    }
+}
+
+class Stats {
+    constructor(){
+        this.points = 0;
+        this.playerDeaths = 0;
+        this.startTime = null;
+        this.endTime = null;
+
+        this.timesSlashed = 0;
+        this.enemiesKilled = 0;
+    }
+
+    calculateMinutesPlayed() {
+        let start = this.startTime.getTime();
+        let end = this.endTime.getTime();
+
+        let millisecondsPlayed = end - start;
+        let seconds = millisecondsPlayed / 1000;
+
+        return Math.floor(seconds/60);
+    }
+
+    calculateSecondsPlayed() {
+        let start = this.startTime.getTime();
+        let end = this.endTime.getTime();
+
+        let millisecondsPlayed = end - start;
+        let seconds = millisecondsPlayed / 1000;
+
+        return Math.floor(seconds % 60);
     }
 }

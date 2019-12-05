@@ -34,9 +34,8 @@ class Character extends Movable {
 
     triggerWeapon(){
         if (this.weapon != null) {
-            return this.weapon.trigger();
+            this.weapon.trigger();
         }
-        return null;
     }
 
     damage( amount ){
