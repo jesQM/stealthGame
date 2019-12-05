@@ -27,9 +27,18 @@ class GameLayer extends Layer {
         }
     }
 
-    killPlayer(){
+    playerWasKilled(){
         this.playerDeaths++;
-        this.start( this.levelNumber );
+        this.playerAlive = false;
+
+        let animSkull = new Animacion(pictures.skullAnim, 200, 157, 6, 5, function () {
+            this.music.stopPersecution();
+            this.start( this.levelNumber );
+        }.bind(this) );
+        let animBorder = new Animacion(pictures.stealthOn, 480,320, 3,10);
+
+        this.foregroundAnimations.push( animSkull );
+        this.foregroundAnimations.push( animBorder );
     }
 
     savedHostages() {
@@ -59,6 +68,7 @@ class GameLayer extends Layer {
         this.bushes = [];
         this.enemies = [];
         this.visualEffects = [];
+        this.foregroundAnimations = [];
 
         this.hud = new HUD(3, 40, 270);
         this.healthMeter = new HUD(4, 40, 50);
@@ -67,6 +77,8 @@ class GameLayer extends Layer {
 
         new LevelLoader(this).cargarMapa("res/map/map"+levelNumber+".txt");
         new PropertyLoader(this).cargarMapa("res/map/properties"+levelNumber+".txt");
+
+        this.playerAlive = true;
 
         this.stealthStartAnimation = null;
         this.updateStealthAnimation = false;
@@ -92,6 +104,8 @@ class GameLayer extends Layer {
             this.espacio.dinamicos[i].actualizar();
         for (var i = 0; i < this.visualEffects.length; i++)
             this.visualEffects[i].actualizar();
+        for (var i = 0; i < this.foregroundAnimations.length; i++)
+            this.foregroundAnimations[i].actualizar();
 
         let inBush = false;
         for( var i = 0; i < this.bushes.length; i++ ){
@@ -154,6 +168,9 @@ class GameLayer extends Layer {
         for (var i = 0; i < this.espacio.dinamicos.length; i++)
             this.espacio.dinamicos[i].dibujar(this.scrollX, this.scrollY);
 
+        for (var i = 0; i < this.foregroundAnimations.length; i++)
+            this.foregroundAnimations[i].dibujar(480 / 2, 320 / 2);
+
         if (this.drawStealthForeground) {
             this.stealthForeground.dibujar();
         } else if (this.stealthStartAnimation != null) {
@@ -165,6 +182,8 @@ class GameLayer extends Layer {
     }
 
     procesarControles(){
+        if ( !this.playerAlive ) return;
+
         // Attack
         if (controles.disparo) {
             this.player.triggerWeapon();

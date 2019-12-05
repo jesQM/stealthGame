@@ -23,7 +23,7 @@ class Player extends Character {
 
     actualizar() {
 
-        console.log("player: " + this.x + " - " + this.y);
+        //console.log("player: " + this.x + " - " + this.y);
 
         super.actualizar();
         this.changeOrientation();
@@ -85,8 +85,15 @@ class Player extends Character {
     }
 
     damage(amount) {
+        if ( this.health <= 0 ) return;
+
         super.damage(amount);
         gameLayer.updateHealth();
+    }
+
+    kill() {
+        super.kill();
+        gameLayer.playerWasKilled();
     }
 
     isMovingX() {

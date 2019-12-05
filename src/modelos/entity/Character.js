@@ -51,23 +51,23 @@ class Character extends Movable {
     changePictureToShowHealth() {
         if (this.health >= this.maxHealth) {
             // 100
-            this.imagen.src = this.woundedPictures[0];
+            this.imagen = cache[this.woundedPictures[0]];
 
         } else if (this.health > this.maxHealth*0.75){
             // 75-100
-            this.imagen.src = this.woundedPictures[1];
+            this.imagen = cache[this.woundedPictures[1]];
 
         } else if (this.health > this.maxHealth*0.5){
             // 50-75
-            this.imagen.src = this.woundedPictures[2];
+            this.imagen = cache[this.woundedPictures[2]];
 
         } else if (this.health > this.maxHealth*0.25){
             // 25-75
-            this.imagen.src = this.woundedPictures[3];
+            this.imagen = cache[this.woundedPictures[3]];
 
         } else if (this.health > 0){
             // 0 - 25
-            this.imagen.src = this.woundedPictures[4];
+            this.imagen = cache[this.woundedPictures[4]];
 
         } else {
             // 0
@@ -78,7 +78,9 @@ class Character extends Movable {
     kill(){
         this.health = 0;
         this.speed = 0;
-        this.imagen.src = pictures.dead;
+        this.vx = 0;
+        this.vy = 0;
+        this.imagen = cache[pictures.dead];
     }
 
     colisiona(modelo) {

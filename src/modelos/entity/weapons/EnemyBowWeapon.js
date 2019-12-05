@@ -23,7 +23,6 @@ class EnemyBowWeapon extends Weapon{
         x = x/20;
         y = y/20;
 
-        console.log(x + " - " + y);
         // 2.- Create arrow
         gameLayer.espacio.agregarCuerpoDinamico( new Arrow( this.entity.x, this.entity.y, -x, -y, this.targets ) )
     }

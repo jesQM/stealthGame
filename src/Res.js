@@ -29,6 +29,7 @@ var pictures = {
     bow : "res/bow.png",
     arrow : "res/arrow.png",
     heart : "res/heart.png",
+    skullAnim : "res/skull/skullAnim.png",
 
     swordR: "res/swordAnim/swordR.png",
     swordL: "res/swordAnim/swordL.png",
@@ -77,18 +78,39 @@ var audio = {
     slash9 : "res/sound/fx/Socapex - Swordsmall_3.wav",
 };
 
+const cache = [];
+const cacheAudio = [];
 var rutasImagenes = Object.values(pictures);
+var rutasAudio = Object.values(audio);
 cargarImagenes(0);
 
 function cargarImagenes(indice){
-    var imagenCargar = new Image();
-    imagenCargar.src = rutasImagenes[indice];
-    imagenCargar.onload = function(){
+    cache[rutasImagenes[indice]] = new Image();
+    cache[rutasImagenes[indice]].src = rutasImagenes[indice];
+    cache[rutasImagenes[indice]].onload = function(){
         if ( indice < rutasImagenes.length-1 ){
             indice++;
             cargarImagenes(indice);
         } else {
-            iniciarJuego();
+            cargarAudio( 0 );
         }
+    }
+}
+
+function cargarAudio(index, offset = cache.length-1) {
+    cacheAudio[rutasAudio[index] ] = new Audio( rutasAudio[index] );
+    if ( index < rutasAudio.length-1 ){
+        index++;
+        cargarAudio(index);
+    } else {
+        removeOnloadEvent()
+        iniciarJuego();
+    }
+}
+
+// change the onload event, in case it triggers, nothing happens else, the old one would get triggered
+function removeOnloadEvent() {
+    for (let i = 0; i < rutasImagenes.length; i++) {
+        cache[rutasImagenes[i]].onload = () => {};
     }
 }

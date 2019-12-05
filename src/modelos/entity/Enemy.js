@@ -18,7 +18,6 @@ class Enemy extends Character {
         this.interruptedMovementStrategy = [];
         this.interruptedMovementStates = [];
 
-
         this.woundedPictures = [
             pictures.enemyW0,
             pictures.enemyW1,

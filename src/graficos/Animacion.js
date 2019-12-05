@@ -4,7 +4,6 @@ class Animacion {
         // Nuevo para animaciones finitas
         this.callback = callback;
 
-
         this.imagen = new Image();
         this.imagen.src = imagenSrc;
 

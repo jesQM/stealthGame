@@ -60,6 +60,12 @@ class LevelLoader {
                 shield.y = shield.y - shield.alto / 2;
                 this.gameLayer.espacio.agregarCuerpoDinamico(shield);
                 break;
+            case "R":
+                var rehen = new Hostage(x, y);
+                rehen.x = rehen.x- rehen.ancho / 2;
+                rehen.y = rehen.y - rehen.alto / 2;
+                this.gameLayer.espacio.agregarCuerpoDinamico(rehen);
+                break;
             case "B":
                 var bush = new Bush(x, y);
                 bush.x = bush.x - bush.ancho / 2;
