@@ -64,6 +64,8 @@ class PropertyLoader {
                 enemy.x = enemy.x- enemy.ancho / 2;
                 enemy.y = enemy.y - enemy.alto / 2;
                 enemy.movementStrategy.orientationOfEntity = parseInt( direction );
+                if ( waypoints.length > 1 )
+                    enemy.setToPatrol(waypoints);
                 this.gameLayer.enemies.push(enemy);
                 this.gameLayer.espacio.agregarCuerpoDinamico(enemy);
                 break;

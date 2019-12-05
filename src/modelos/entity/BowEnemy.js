@@ -9,4 +9,11 @@ class BowEnemy extends Enemy {
         this.currentMaxSpeed = this.totalMaxSpeed;
         this.speed = this.currentMaxSpeed;
     }
+
+    setToPatrol(arrayOfWaypoints) {
+        super.setToPatrol(arrayOfWaypoints);
+        this.totalMaxSpeed = 0.5;
+        this.currentMaxSpeed = this.totalMaxSpeed;
+        this.speed = this.currentMaxSpeed;
+    }
 }

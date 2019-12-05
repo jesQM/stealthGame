@@ -15,7 +15,7 @@ class StatsLayer extends Layer {
         this.texts.push( this.textTimePlayed );
         this.texts.push( this.textDeathCount );
         this.texts.push( this.textPeopleSaved );
-        this.texts.push( this.textEnemiesKilled );
+        //this.texts.push( this.textEnemiesKilled );
         this.texts.push( this.textTimesSlashed );
 
         this.counter = 15;

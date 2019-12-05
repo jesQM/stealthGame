@@ -23,7 +23,7 @@ class Player extends Character {
 
     actualizar() {
 
-        //console.log("player: " + this.x + " - " + this.y);
+        console.log("player: " + this.x + " - " + this.y);
 
         super.actualizar();
         this.changeOrientation();

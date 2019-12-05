@@ -4,11 +4,4 @@ class SwordEnemy extends Enemy {
 
         this.weapon = new EnemySwordWeapon(this);
     }
-
-    setToPatrol( arrayOfWaypoints ){
-        this.waypoints = arrayOfWaypoints;
-        this.movementStrategy = new PatrolMovement(this);
-        this.movementStrategy.orientationOfEntity = orientations.up;
-        this.followState = enemyFollowStates.patrol;
-    }
 }

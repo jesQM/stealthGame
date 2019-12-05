@@ -330,4 +330,11 @@ class Enemy extends Character {
 
         return false;
     }
+
+    setToPatrol( arrayOfWaypoints ){
+        this.waypoints = arrayOfWaypoints;
+        this.movementStrategy = new PatrolMovement(this);
+        this.movementStrategy.orientationOfEntity = orientations.up;
+        this.followState = enemyFollowStates.patrol;
+    }
 }
