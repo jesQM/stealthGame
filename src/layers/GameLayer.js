@@ -2,7 +2,7 @@ class GameLayer extends Layer {
 
     constructor() {
         super();
-        this.maxLevel = 0;
+        this.maxLevel = 2;
 
         this.stats = new Stats();
         this.music = new AudioManager();
