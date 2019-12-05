@@ -62,7 +62,6 @@ var pictures = {
 var audio = {
     background: "res/sound/chicago.ogg",
     background_LPF: "res/sound/chicago_LPF.ogg",
-    background_seen: "res/sound/chicago_seen.ogg",
 
     knife1 : "res/sound/fx/knifesharpener1.wav",
     knife2 : "res/sound/fx/knifesharpener2.wav",
@@ -77,6 +76,10 @@ var audio = {
     slash8 : "res/sound/fx/Socapex - Swordsmall_2.wav",
     slash9 : "res/sound/fx/Socapex - Swordsmall_3.wav",
 };
+
+var uncachedAudio = {
+    background_seen: "res/sound/chicago_seen.ogg",
+}
 
 const cache = [];
 const cacheAudio = [];

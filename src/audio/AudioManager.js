@@ -90,7 +90,7 @@ class AudioManager {
         if ( this.persecution != null && !this.persecution.audio.paused && !this.persecution.audioTerminating) return;
 
         if ( this.persecution != null && this.persecution.audioTerminating ) this.persecution.pause();
-        this.persecution = new AudioPlayer( audio.background_seen, true );
+        this.persecution = new AudioPlayer( uncachedAudio.background_seen, true );
         this.persecution.play();
 
         if ( this.background != null && !this.background.audio.paused ) this.background.pause();
